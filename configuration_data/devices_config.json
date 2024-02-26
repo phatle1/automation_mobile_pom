@@ -1,0 +1,51 @@
+{
+  "device_caps": {
+    "device1": {
+      "platformName": "Android",
+        "appium:deviceName": "emulator-5554",
+        "appium:automationName": "UiAutomator2",
+        "appium:app": "/Users/lephat/Downloads/signed.apk",
+        "appium:appPackage": "io.pizzahut.hutbot.qa",
+        "appium:appActivity": "io.yum.MainActivity",
+        "appium:uiautomator2ServerInstallTimeout": 150000,
+        "appium:appWaitForLaunch": true,
+        "appium:disableWindowAnimation": true,
+        "appium:autoGrantPermissions": true,
+        "appium:clearSystemFiles": true,
+        "appium:nativeWebScreenshot": true,
+        "appium:adbExecTimeout": 80000,
+        "appium:ensureWebviewsHavePages": true,
+        "appium:newCommandTimeout": 3600,
+        "appium:connectHardwareKeyboard": true,
+        "appium:noReset": false,
+        "__appium:fullReset" :true,
+        "appium:hideKeyboard": true,
+        "__appium:isHeadless__": true,
+        "__appium:avdArgs__": "-no-window"
+    },
+    "device2": {
+      "platformName": "Android",
+        "appium:deviceName": "emulator-5556",
+        "appium:automationName": "UiAutomator2",
+        "appium:app": "/Users/lephat/Downloads/signed.apk",
+        "appium:appPackage": "io.pizzahut.hutbot.qa",
+        "appium:appActivity": "io.yum.MainActivity",
+        "appium:uiautomator2ServerInstallTimeout": 150000,
+        "appium:appWaitForLaunch": true,
+        "appium:disableWindowAnimation": true,
+        "appium:autoGrantPermissions": true,
+        "appium:clearSystemFiles": true,
+        "appium:nativeWebScreenshot": true,
+        "appium:adbExecTimeout": 80000,
+        "appium:ensureWebviewsHavePages": true,
+        "appium:newCommandTimeout": 3600,
+        "appium:connectHardwareKeyboard": true,
+        "appium:noReset": true,
+        "appium:hideKeyboard": true,
+        "__appium:isHeadless__": true,
+        "__appium:avdArgs__": "-no-window"
+    }
+  }
+}
+
+

@@ -9,9 +9,12 @@ __pycache__/
 env/*
 venv/*
 allure_report/
+allure-report/
 apk/
 appium_grid_files/
 selenium_server/
+bin/
+lib/
 
 #remove all pyc file
 #find . -name "*.pyc" -exec git rm -f "{}" \;

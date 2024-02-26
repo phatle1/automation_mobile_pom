@@ -1,0 +1,18 @@
+logs/
+.pyc
+.env
+.venv
+*.pyc
+.idea/
+__pycache__/
+*.txt
+env/*
+venv/*
+allure_report/
+apk/
+appium_grid_files/
+selenium_server/
+
+#remove all pyc file
+#find . -name "*.pyc" -exec git rm -f "{}" \;
+env/bin/activate

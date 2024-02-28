@@ -62,7 +62,7 @@ class data_access_object:
             raise SystemExit(e)
 
     @staticmethod
-    def update_user_information(yum_id) -> dict:
+    def update_user_information(yum_id) -> bool:
         try:
             url = f"https://dev.api.hutbot.pizzahut.io/ssam-users/{yum_id}"
             body: dict[str, any] = config_reader.load_devices_config("../configuration_data/api_body.json")
@@ -73,9 +73,9 @@ class data_access_object:
                 'Authorization': f'Bearer {data_access_object.get_access_token()}'
             }
             response = requests.request("PUT", url, headers=headers, data=payload)
-            response_as_dict = json.loads(response.text)
-            print(f"user_info: {response_as_dict.get('response_as_dict')}")
-            return response_as_dict
+            result = str(response)
+            print(result)
+            return '200' in result
         except requests.exceptions.Timeout:
             pass
         except requests.exceptions.TooManyRedirects:
@@ -84,5 +84,3 @@ class data_access_object:
             # catastrophic error. bail.
             raise SystemExit(e)
 
-
-data_access_object.update_user_information('gcv2701')

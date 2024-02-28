@@ -20,11 +20,11 @@ class objects_store_selection_screen(object):
 
     @staticmethod
     def welcome_lbl(user_first_name):
-        return f"//android.widget.TextView[@text='Hi {user_first_name}!']_XPATH"
+        return AppiumBy.XPATH, f"//android.widget.TextView[@text='Hi {user_first_name}!']"
 
     @staticmethod
     def store_selection_lbl(internal_store_number):
-        return f"//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup//android.widget.ScrollView//*[@resource-id='StoreListItemNative_{internal_store_number}']_XPATH"
+        return AppiumBy.XPATH, f"//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup//android.widget.ScrollView//*[@resource-id='StoreListItemNative_{internal_store_number}']"
 
 
 class store_selection_screen(base_screen):

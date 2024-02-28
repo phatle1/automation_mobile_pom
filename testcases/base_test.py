@@ -1,4 +1,5 @@
 import pytest
+from utilities.log_utils import logger_decorator
 
 
 @pytest.mark.flaky(reruns=1)

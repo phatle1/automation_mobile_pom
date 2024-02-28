@@ -3,7 +3,6 @@ from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 import unittest
 import logging
-from utilities.log_utils import decorator
 
 # For W3C actions
 from selenium.webdriver.common.action_chains import ActionChains
@@ -21,24 +20,29 @@ options.load_capabilities({
     "appium:ensureWebviewsHavePages": True,
     "appium:nativeWebScreenshot": True,
     "appium:newCommandTimeout": 3600,
-    "appium:connectHardwareKeyboard": True
+    "appium:connectHardwareKeyboard": True,
+    "appium:disableIdLocatorAutocompletion": True
+
+
 })
 
 
-@decorator
+
 def test_simple():
     driver = webdriver.Remote("http://0.0.0.0:4723", options=options)
     # driver.find_elements()
     driver.implicitly_wait(30)
 
-    # logger.info('hello this is Phat')
-    el1 = driver.find_elements(by=AppiumBy.XPATH, value="//android.view.ViewGroup[@resource-id='Auth_LoginButton']")
+    el1 = driver.find_element(by=AppiumBy.ID, value="Auth_LoginButton")
+
+
     # el1 = driver.find_element(by=AppiumBy.XPATH, value="//android.view.ViewGroup[@resource-id='Auth_LoginButton']")
-    action_chain = ActionChains(driver)
-    # logger.info('hello this is Phat')
-    action_chain.click(el1[0]).perform()
-    print("đay ne ---------------------")
-    el1[0].click()
+    el1.click()
+    # action_chain = ActionChains(driver)
+    # # logger.info('hello this is Phat')
+    # action_chain.click(el1[0]).perform()
+    # print("đay ne ---------------------")
+    # el1[0].click()
     driver.implicitly_wait(10)
     el2 = driver.find_element(by=AppiumBy.CLASS_NAME, value="android.widget.EditText")
     el2.send_keys("gcv2701")

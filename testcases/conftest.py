@@ -7,7 +7,6 @@ from appium.options.common.base import AppiumOptions
 from utilities import config_reader
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.appium_service import AppiumService, DEFAULT_PORT, DEFAULT_HOST
-from utilities.log_utils import decorator, action_log_decorator
 import os
 
 # global driver
@@ -30,13 +29,12 @@ def pytest_runtest_makereport(item, call):
 # io.pizzahut.hutbot.qa/io.yum.MainActivity
 
 @pytest.fixture(scope="function")
-@action_log_decorator
 def appium_driver(request):
     service_device = AppiumService()
-    # service_device.start(args=['-p', '4723', '--base-path', '/', '--session-override'])
+    service_device.start(args=['-p', '4723', '--base-path', '/', '--session-override'])
     time.sleep(2)
 
-    device_caps: dict[str, any] = config_reader.load_devices_config()
+    device_caps: dict[str, any] = config_reader.load_devices_config("../configuration_data/devices_config.json")
     device = device_caps['device_caps']['device1']
     url = 'http://0.0.0.0:4723'
     driver = webdriver.Remote(command_executor=url, options=AppiumOptions().load_capabilities(device))

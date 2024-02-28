@@ -1,8 +1,9 @@
 import requests
 import json
+from utilities import config_reader
 
 
-class DataAccessObject():
+class data_access_object:
     dev_env: str = "https://dev.api.hutbot.pizzahut.io"
     stag_env: str = "https://dev.api.hutbot.pizzahut.io"
     prod_env: str = "https://dev.api.hutbot.pizzahut.io"
@@ -46,7 +47,7 @@ class DataAccessObject():
 
             payload = {}
             headers = {
-                'Authorization': f'Bearer {DataAccessObject.get_access_token()}'
+                'Authorization': f'Bearer {data_access_object.get_access_token()}'
             }
             response = requests.request("GET", url, headers=headers, data=payload)
             response_as_dict = json.loads(response.text)
@@ -59,3 +60,29 @@ class DataAccessObject():
         except requests.exceptions.RequestException as e:
             # catastrophic error. bail.
             raise SystemExit(e)
+
+    @staticmethod
+    def update_user_information(yum_id) -> dict:
+        try:
+            url = f"https://dev.api.hutbot.pizzahut.io/ssam-users/{yum_id}"
+            body: dict[str, any] = config_reader.load_devices_config("../configuration_data/api_body.json")
+            user_info = body['apis']['update_user_info']
+            payload = json.dumps(user_info)
+            headers = {
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {data_access_object.get_access_token()}'
+            }
+            response = requests.request("PUT", url, headers=headers, data=payload)
+            response_as_dict = json.loads(response.text)
+            print(f"user_info: {response_as_dict.get('response_as_dict')}")
+            return response_as_dict
+        except requests.exceptions.Timeout:
+            pass
+        except requests.exceptions.TooManyRedirects:
+            pass
+        except requests.exceptions.RequestException as e:
+            # catastrophic error. bail.
+            raise SystemExit(e)
+
+
+data_access_object.update_user_information('gcv2701')

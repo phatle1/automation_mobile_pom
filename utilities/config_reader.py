@@ -18,9 +18,9 @@ def remove_locator_extension(locator: str, extension: str) -> str:
         pass
 
 
-def load_devices_config():
+def load_devices_config(file_path):
     try:
-        with open('../configuration_data/devices_config.json') as json_file:
+        with open(file_path) as json_file:
             devices = json.load(json_file)
             return devices
     except FileNotFoundError:

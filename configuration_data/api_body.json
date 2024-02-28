@@ -1,0 +1,70 @@
+{
+    "apis":
+    {
+        "update_user_info":
+        {
+            "First Name": "Phat(QA)",
+            "Last Name": "Le",
+            "Middle Name": "",
+            "UserStatus": "Active",
+            "English First Name": "",
+            "English Last Name": "",
+            "GPN": "1005203832",
+            "Yum ID": "gcv2701",
+            "User Type": "YRI-Corporate",
+            "Business Unit ID": "23",
+            "Business Unit Name": "AFBU",
+            "User Primary Brand": "PH-US",
+            "User Country Code": "65",
+            "User Country ISO Code": "SGP",
+            "User Country Name": "Singapore",
+            "Third Party Name": "",
+            "Operational Role": "Full Brand Access",
+            "Email": "test@test.com",
+            "Phone Number": "123456",
+            "Vendor Tool": "ROCC/ACE_Reporting_Tool,HutBotAdmin,HutBotAreaCoach,HutBot,HutBotCountryCoach",
+            "HierarchyDetails":
+            [
+                {
+                    "Primary Coach": "No",
+                    "Hierarchy role": "Full Brand Access",
+                    "Brand": "PH",
+                    "Country Code": "44",
+                    "Country ISO Code": "GBR",
+                    "Country Name": "Great britain",
+                    "Area ID": "",
+                    "Stores": ""
+                },
+                {
+                    "Primary Coach": "No",
+                    "Hierarchy role": "Full Brand Access",
+                    "Brand": "KFC",
+                    "Country Code": "44",
+                    "Country ISO Code": "GBR",
+                    "Country Name": "Great britain",
+                    "Stores": "13395"
+                },
+                {
+                    "Primary Coach": "No",
+                    "Hierarchy role": "Full Brand Access",
+                    "Brand": "PH-US",
+                    "Country Code": "44",
+                    "Country ISO Code": "GBR",
+                    "Country Name": "Great britain",
+                    "Stores": ""
+                },
+                {
+                    "Primary Coach": "No",
+                    "Hierarchy role": "Full Brand Access",
+                    "Brand": "PH",
+                    "Country Code": "84",
+                    "Country ISO Code": "VNM",
+                    "Country Name": "Vietnam",
+                    "Area ID": "",
+                    "Stores": ""
+                }
+            ],
+            "Vendor Reports": "ACE Visit Report,After the visit: L3 Notification,ACE & FSCC Action Plan Reminder"
+        }
+    }
+}

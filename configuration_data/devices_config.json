@@ -21,7 +21,9 @@
         "__appium:fullReset" :true,
         "appium:hideKeyboard": true,
         "__appium:isHeadless__": true,
-        "__appium:avdArgs__": "-no-window"
+        "__appium:avdArgs__": "-no-window",
+        "appium:disableIdLocatorAutocompletion": true,
+        "__android:id/navigationBarBackground--": ""
     },
     "device2": {
       "platformName": "Android",

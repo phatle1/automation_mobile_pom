@@ -18,8 +18,8 @@ class base_screen:
     def get_element_by_type(self, method, value):
         self.page_utils.get_element_by_type(method, value)
 
-    def get_element_by_locator(self, locator):
-        return self.page_utils.get_element_by_locator(locator)
+    def get_element_by_locator(self, *locator):
+        return self.page_utils.get_element_by_locator(*locator)
 
     def action_tap(self, element: WebElement, element_name=None):
         log.logger.info(f"Tap on {element_name}")
@@ -60,5 +60,5 @@ class base_screen:
     def wait_until_element_disappeared(self, element: WebElement):
         return self.page_utils.wait_until_element_to_be_invisible(element)
 
-    def get_elements_by_locator(self, locator):
-        return self.page_utils.get_elements_by_locator(locator=locator)
+    def get_elements_by_locator(self, *locator):
+        return self.page_utils.get_elements_by_locator(*locator)

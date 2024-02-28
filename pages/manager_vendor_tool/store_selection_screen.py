@@ -1,21 +1,22 @@
 from pages.base_screen import base_screen
+from appium.webdriver.common.appiumby import AppiumBy
 
 
 class objects_store_selection_screen(object):
     # basic store selection
-    search_bar_txt = "//android.widget.EditText[@resource-id='SearchBar_TextInput']_XPATH"
-    pizza_hut_ico = "//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup/android.view.ViewGroup[1]_XPATH"
-    kfc_ico = "//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup/android.view.ViewGroup[2]_XPATH"
-    map_switcher_btn = "(//android.widget.TextView//ancestor::android.view.ViewGroup//com.horcrux.svg.SvgView)[2]"
-    logout_btn = "(//android.widget.TextView//ancestor::android.view.ViewGroup//com.horcrux.svg.SvgView)[1]"
-    choose_your_restaurant_txt = "(//android.widget.TextView)[2]"
+    search_bar_txt = (AppiumBy.ID, 'SearchBar_TextInput')
+    choose_your_restaurant_txt = (AppiumBy.XPATH, "(//android.widget.TextView)[2]")
+    logout_btn = (AppiumBy.XPATH, "(//android.widget.TextView//ancestor::android.view.ViewGroup//com.horcrux.svg.SvgView)[1]")
+    kfc_ico = (AppiumBy.XPATH, "//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup/android.view.ViewGroup[2]_XPATH")
+    pizza_hut_ico = (AppiumBy.XPATH, "//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup/android.view.ViewGroup[1]")
+    map_switcher_btn = (AppiumBy.XPATH, "(//android.widget.TextView//ancestor::android.view.ViewGroup//com.horcrux.svg.SvgView)[2]")
 
     # store selection with map
-    my_location_btn = "//android.widget.ImageView[@content-desc='My Location']"
-    map_area = "(//android.widget.RelativeLayout)[2]"
-    first_store_selection = "//android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[1]"
-    zoom_in_btn = "//android.widget.ImageView[@content-desc='Zoom in']"
-    zoom_out_btn = "//android.widget.ImageView[@content-desc='Zoom out']"
+    map_area = (AppiumBy.XPATH, "(//android.widget.RelativeLayout)[2]")
+    zoom_in_btn = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='Zoom in']")
+    zoom_out_btn = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='Zoom out']")
+    my_location_btn = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='My Location']")
+    first_store_selection = (AppiumBy.XPATH, "//android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[1]")
 
     @staticmethod
     def welcome_lbl(user_first_name):
@@ -63,4 +64,4 @@ class store_selection_screen(base_screen):
         assert self.is_element_present(self.choose_your_restaurant_txt())
 
     def verify_user_logged_in_successfully(self, user_first_name):
-        assert self.is_element_present(self.welcome_lbl(user_first_name)) is True
+        assert self.is_element_present(self.welcome_lbl(user_first_name)) is True, 'The expected result is not matches with actual'

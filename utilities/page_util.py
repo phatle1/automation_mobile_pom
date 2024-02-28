@@ -59,56 +59,59 @@ class page_utils(WebElement):
         elif method == 'android':
             return self.driver.find_element_by_android_uiautomator('new UiSelector().%s' % value)
 
-    def get_element_by_locator(self, locator) -> WebElement:
+    def get_element_by_locator(self, *locator) -> WebElement:
         try:
             fluent_wait = WebDriverWait(self.driver, self.time_out, poll_frequency=5,
                                         ignored_exceptions=self.exceptions)
-            log.logger.info(f"Element {str(locator)}")
+            return fluent_wait.until(
+                expected_conditions.presence_of_element_located(locator=(locator[0][0], locator[0][1])))
 
-            xpath_locator = config_reader.remove_locator_extension(locator, self.XPath)
-            id_locator = config_reader.remove_locator_extension(locator, self.ID)
-            accessibility_locator = config_reader.remove_locator_extension(locator, self.ACCESSIBILITYID)
-            class_locator = config_reader.remove_locator_extension(locator, self.CLASS_NAME)
-
-            if str(locator).endswith(self.XPath):
-                return fluent_wait.until(expected_conditions.presence_of_element_located(
-                    locator=(AppiumBy.XPATH, xpath_locator)))
-            elif str(locator).endswith(self.ACCESSIBILITYID):
-                return fluent_wait.until(expected_conditions.presence_of_element_located(
-                    locator=(AppiumBy.ACCESSIBILITY_ID, accessibility_locator)))
-            elif str(locator).endswith(self.ID):
-                return fluent_wait.until(expected_conditions.presence_of_element_located(
-                    locator=(AppiumBy.ID, id_locator)))
-            elif str(locator).endswith(self.CLASS_NAME):
-                return fluent_wait.until(expected_conditions.presence_of_element_located(
-                    locator=(AppiumBy.CLASS_NAME, class_locator)))
-
-            log.logger.info(f"Element {str(locator)}")
         except NoSuchElementException:
-            log.logger.error(f"{str(NoSuchElementException)}  " + str(locator))
-            pass
-        except StaleElementReferenceException:
-            log.logger.error(f"{str(StaleElementReferenceException)}  " + str(locator))
             pass
         except ElementNotVisibleException:
-            log.logger.error(f"{str(ElementNotVisibleException)}  " + str(locator))
+            pass
+        except StaleElementReferenceException:
             pass
 
-    def get_elements_by_locator(self, locator) -> list[WebElement]:
+    # def get_element_by_locator(self, *locator) -> WebElement:
+    #     try:
+    #         fluent_wait = WebDriverWait(self.driver, self.time_out, poll_frequency=5,
+    #                                     ignored_exceptions=self.exceptions)
+    #         log.logger.info(f"Element {str(locator)}")
+    #
+    #         xpath_locator = config_reader.remove_locator_extension(locator, self.XPath)
+    #         id_locator = config_reader.remove_locator_extension(locator, self.ID)
+    #         accessibility_locator = config_reader.remove_locator_extension(locator, self.ACCESSIBILITYID)
+    #         class_locator = config_reader.remove_locator_extension(locator, self.CLASS_NAME)
+    #
+    #         if str(locator).endswith(self.XPath):
+    #             return fluent_wait.until(expected_conditions.presence_of_element_located(
+    #                 locator=(AppiumBy.XPATH, xpath_locator)))
+    #         elif str(locator).endswith(self.ACCESSIBILITYID):
+    #             return fluent_wait.until(expected_conditions.presence_of_element_located(
+    #                 locator=(AppiumBy.ACCESSIBILITY_ID, accessibility_locator)))
+    #         elif str(locator).endswith(self.ID):
+    #             return fluent_wait.until(expected_conditions.presence_of_element_located(
+    #                 locator=(AppiumBy.ID, id_locator)))
+    #         elif str(locator).endswith(self.CLASS_NAME):
+    #             return fluent_wait.until(expected_conditions.presence_of_element_located(
+    #                 locator=(AppiumBy.CLASS_NAME, class_locator)))
+    #
+    #         log.logger.info(f"Element {str(locator)}")
+    #     except NoSuchElementException:
+    #         log.logger.error(f"{str(NoSuchElementException)}  " + str(locator))
+    #         pass
+    #     except StaleElementReferenceException:
+    #         log.logger.error(f"{str(StaleElementReferenceException)}  " + str(locator))
+    #         pass
+    #     except ElementNotVisibleException:
+    #         log.logger.error(f"{str(ElementNotVisibleException)}  " + str(locator))
+    #         pass
+
+    def get_elements_by_locator(self, *locator) -> list[WebElement]:
         try:
-            if str(locator).endswith(self.XPath):
-                xpath_locator = config_reader.remove_locator_extension(locator, self.XPath)
-                return self.driver.find_elements(by=AppiumBy.XPATH, value=xpath_locator)
-            elif str(locator).endswith(self.ACCESSIBILITYID):
-                accessibility_locator = config_reader.remove_locator_extension(locator, self.ACCESSIBILITYID)
-                return self.driver.find_elements(AppiumBy.ACCESSIBILITY_ID(accessibility_locator))
-            elif str(locator).endswith(self.ID):
-                id_locator = config_reader.remove_locator_extension(locator, self.ID)
-                return self.driver.ind_elements(AppiumBy.ID(id_locator))
-            elif str(locator).endswith(self.CLASS_NAME):
-                class_locator = config_reader.remove_locator_extension(locator, self.CLASS_NAME)
-                return self.driver.find_elements(AppiumBy.CLASS_NAME(class_locator))
-            log.logger.info(f"Element {str(locator)}")
+            log.logger.info(f"Element {str(*locator)}")
+            return self.driver.find_elements(locator[0][0], locator[0][1])
         except NoSuchElementException:
             log.logger.error(f"{str(NoSuchElementException)}  " + str(locator))
             pass
@@ -136,6 +139,7 @@ class page_utils(WebElement):
                 except self.exceptions:
                     sleep(1)
                     i += 3
+
             raise Exception('Element never became visible: %s (%s)' % (element[0], element[0]))
         except self.exceptions:
             log.logger.error(f"Element not found: {str(element)}")

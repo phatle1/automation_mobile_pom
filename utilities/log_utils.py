@@ -32,7 +32,7 @@ def action_log_decorator(cls):
             pass
 
 
-def decorator(func):
+def logger_decorator(func):
     def wrapper(*args, **kwargs):
         start_time = time.perf_counter()
         val = func(*args, **kwargs)

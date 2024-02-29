@@ -34,7 +34,6 @@ class page_utils(WebElement):
         self.CLASS_NAME = "_CLASS_NAME"
         self.ID = "_ID"
         self.user_action = ActionChains(driver)
-        self.multi_action = MultiAction(driver)
         self.time_out: int = 30
         self.exceptions = [ElementNotVisibleException, NoSuchElementException, StaleElementReferenceException]
         # self.web_element = WebElement(driver)
@@ -294,25 +293,6 @@ class page_utils(WebElement):
 
     def long_press(self):
         pass
-
-    def pinch(self):
-        try:
-            xx = self.driver.get_window_size()['width'] / 2
-            yy = self.driver.get_window_size()['height'] / 2
-            action1 = TouchAction(self.driver)
-            action2 = TouchAction(self.driver)
-            zoom_action = MultiAction(self.driver)
-            action1.long_press(x=xx, y=yy).move_to(x=0, y=50).wait(500).release()
-            action2.long_press(x=xx, y=yy).move_to(x=0, y=-50).wait(500).release()
-            zoom_action.add(action1, action2)
-        except NoSuchElementException:
-            pass
-        except StaleElementReferenceException:
-            pass
-        except ElementNotVisibleException:
-            pass
-        except TimeoutException:
-            pass
 
     @staticmethod
     def verify_equal(expected, actual):

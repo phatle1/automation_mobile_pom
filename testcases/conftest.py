@@ -35,8 +35,11 @@ def appium_driver(request):
     time.sleep(2)
     config_path = '../configuration_data/devices_config.json'
     device_caps: dict[str, any] = config_reader.load_devices_config(config_path)
-    # device = device_caps['device_caps']['device1']
-    device = ({
+
+    print(str(device_caps))
+    device = device_caps['device_caps']
+    temp = device['device1']
+    device123 = ({
         "platformName": "Android",
         "appium:deviceName": "emulator-5554",
         "appium:automationName": "UiAutomator2",
@@ -57,8 +60,11 @@ def appium_driver(request):
         "appium:isHeadless": True,
         "appium:avdArgs": "-no-window"
     })
+    print(device)
+    print(device123)
+
     url = 'http://0.0.0.0:4723'
-    driver = webdriver.Remote(command_executor=url, options=AppiumOptions().load_capabilities(device))
+    driver = webdriver.Remote(command_executor=url, options=AppiumOptions().load_capabilities(temp))
 
     request.cls.driver = driver
     driver.implicitly_wait(5)

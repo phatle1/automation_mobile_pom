@@ -11,6 +11,8 @@ from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
 from selenium.webdriver.common.by import By
 
+
+
 options = UiAutomator2Options()
 options.load_capabilities({
     "platformName": "Android",

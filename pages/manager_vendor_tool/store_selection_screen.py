@@ -18,6 +18,9 @@ class objects_store_selection_screen(object):
     my_location_btn = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='My Location']")
     first_store_selection = (AppiumBy.XPATH, "//android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[1]")
 
+    # confirmation screen
+    yes_btn = (AppiumBy.ID, "Store_Yes")
+
     @staticmethod
     def welcome_lbl(user_first_name):
         return AppiumBy.XPATH, f"//android.widget.TextView[@text='Hi {user_first_name}!']"
@@ -32,32 +35,35 @@ class store_selection_screen(base_screen):
         super().__init__(driver)
 
     # Get elements section
-    def search_bar_txt(self):
+    def get_search_bar_txt(self):
         return self.get_element_by_locator(objects_store_selection_screen.search_bar_txt)
 
-    def pizza_hut_ico(self):
+    def get_pizza_hut_ico(self):
         return self.get_element_by_locator(objects_store_selection_screen.pizza_hut_ico)
 
-    def kfc_ico(self):
+    def get_kfc_ico(self):
         return self.get_element_by_locator(objects_store_selection_screen.kfc_ico)
 
-    def my_location_btn(self):
+    def get_my_location_btn(self):
         return self.get_element_by_locator(objects_store_selection_screen.my_location_btn)
 
-    def first_store_selection(self):
+    def get_first_store_selection(self):
         return self.get_element_by_locator(objects_store_selection_screen.first_store_selection)
 
-    def zoom_in_btn(self):
+    def get_zoom_in_btn(self):
         return self.get_element_by_locator(objects_store_selection_screen.zoom_in_btn)
 
-    def zoom_out_btn(self):
+    def get_zoom_out_btn(self):
         return self.get_element_by_locator(objects_store_selection_screen.zoom_out_btn)
 
-    def welcome_lbl(self, user_first_name):
+    def get_welcome_lbl(self, user_first_name):
         return self.get_element_by_locator(objects_store_selection_screen.welcome_lbl(user_first_name))
 
-    def choose_your_restaurant_txt(self):
+    def get_choose_your_restaurant_txt(self):
         return self.get_element_by_locator(objects_store_selection_screen.choose_your_restaurant_txt)
+
+    def get_yes_btn(self):
+        return self.get_element_by_locator(objects_store_selection_screen.yes_btn)
 
     # Verify section
     def verify_user_log_in_successful(self):

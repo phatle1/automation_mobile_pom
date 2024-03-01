@@ -37,7 +37,7 @@ pytest TestCases/test_login.py --alluredir=./allure_report
 ## run allure-report
 
 ```python
-allure serve ./allure-report    
+allure serve ./allure-report
 ```
 
 ## BUILD DOCKER IMAGE
@@ -88,6 +88,7 @@ adb shell dumpsys window | grep -E 'mCurrentFocus'
 cd ~/
 open .zprofile
 open .bash_profile 
+nano ~/.zshrc
 
 
 ```

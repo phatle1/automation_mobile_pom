@@ -27,6 +27,7 @@ class Test_Login(base_test):
         store_selection.verify_user_logged_in_successfully(user_first_name['First Name'])
 
     def test_user_can_submit_a_routine(self):
+        self.test_login_with_valid_authentication()
         routines = routines_screen(self.driver)
 
 

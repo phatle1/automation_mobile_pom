@@ -67,7 +67,7 @@ class store_selection_screen(base_screen):
 
     # Verify section
     def verify_user_log_in_successful(self):
-        assert self.is_element_present(self.choose_your_restaurant_txt())
+        assert self.is_element_present(self.get_choose_your_restaurant_txt())
 
     def verify_user_logged_in_successfully(self, user_first_name):
-        assert self.is_element_present(self.welcome_lbl(user_first_name)) is True, 'The expected result is not matches with actual'
+        assert self.is_element_present(self.get_welcome_lbl(user_first_name)) is True, 'The expected result is not matches with actual'

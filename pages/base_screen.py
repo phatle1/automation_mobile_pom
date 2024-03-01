@@ -21,16 +21,13 @@ class base_screen:
     def get_element_by_locator(self, *locator):
         return self.page_utils.get_element_by_locator(*locator)
 
-    def action_tap(self, element: WebElement, element_name=None):
-        log.logger.info(f"Tap on {element_name}")
+    def action_tap(self, element: WebElement):
         self.page_utils.action_tap(element)
 
-    def action_tap_continuously(self, element: WebElement, element_name=None):
-        log.logger.info(f"Tap to {element_name}")
+    def action_tap_continuously(self, element: WebElement):
         self.page_utils.action_tap_continuously(element=element)
 
-    def action_type(self, element: WebElement, value, element_name=None):
-        log.logger.info(f"Type {value} to {element_name}")
+    def action_type(self, element: WebElement, value):
         self.page_utils.action_type(element=element, value=value)
 
     def click_index(self, locator, index):

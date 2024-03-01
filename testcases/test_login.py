@@ -1,4 +1,6 @@
 import pytest
+from appium.webdriver import webdriver
+
 from testcases.base_test import base_test
 
 from pages.login_screen import login_screen
@@ -13,6 +15,7 @@ from utilities import data_access_object
 class Test_Login(base_test):
 
     # @pytest.fixture(scope="function")
+
     @pytest.mark.parametrize("username,password", data_provider.get_authentication("FBA"))
     def test_login_with_valid_authentication(self, username, password):
         home = login_screen(self.driver)
@@ -25,9 +28,4 @@ class Test_Login(base_test):
 
         user_first_name = (data_access.data_access_object.get_user_information(username))
         store_selection.verify_user_logged_in_successfully(user_first_name['First Name'])
-
-    def test_user_can_submit_a_routine(self):
-        self.test_login_with_valid_authentication()
-        routines = routines_screen(self.driver)
-
 

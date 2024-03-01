@@ -42,26 +42,26 @@ class login_screen(base_screen):
     def action_type_user_name_txt(self, user_name):
         element = self.get_user_name_txt()
         assert self.is_element_present(element)
-        self.action_type(element=element, value=user_name, element_name="Username text box")
+        self.action_type(element=element, value=user_name)
         assert self.is_element_filled_by_inputted_value(element=element, value=user_name)
 
     def action_tap_login_btn(self):
         element = self.get_login_btn()
-        self.action_tap(element, element_name="Login Button")
+        self.action_tap(element)
         self.wait_until_element_disappeared(element=element)
 
     def action_tap_login_with_pwd_btn(self):
         element = self.get_login_with_pwd_btn()
         assert self.is_element_present(element)
-        self.action_tap(element, element_name="Login with Pass Word button")
+        self.action_tap(element)
         assert self.wait_until_element_disappeared(element=element)
 
     def action_type_pass_word_txt(self, pass_word):
-        self.action_type(element=self.get_pass_word_txt(), value=pass_word, element_name="Pass Word text box")
+        self.action_type(element=self.get_pass_word_txt(), value=pass_word)
 
     def action_tap_sign_in_btn(self):
         element = self.get_sign_in_btn()
-        self.action_tap(element=element, element_name="Submit button")
+        self.action_tap(element=element)
         assert self.wait_until_element_disappeared(element=element)
 
     def verify_user_can_input_to_textbox(self, value):

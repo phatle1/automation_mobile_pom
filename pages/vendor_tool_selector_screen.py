@@ -27,10 +27,10 @@ class vendor_tool_selector_screen(base_screen):
     # action -------------------------------
 
     def action_tap_manager_tool(self):
-        self.action_tap(self.get_manager_tool_btn(), element_name="Manager Vendor tool")
+        self.action_tap(self.get_manager_tool_btn())
 
     def action_tap_arl_tool(self):
-        self.action_tap(self.get_arl_tool_btn(), element_name="ARL Vendor tool")
+        self.action_tap(self.get_arl_tool_btn())
 
     def action_tap_vendor_tool(self, vendor_tool: str):
         self.action_tap_arl_tool() if vendor_tool.lower() == "arl" else self.action_tap_manager_tool()

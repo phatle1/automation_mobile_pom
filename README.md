@@ -83,7 +83,7 @@ adb shell dumpsys window | grep -E 'mCurrentFocus'
 ```
 
 
-## Modifying .bash_profile or .zprofile (to set JAVA_HOME manually)
+## Modifying .bash_profile or .zprofile (to set *_HOME manually)
 ```bash
 cd ~/
 open .zprofile

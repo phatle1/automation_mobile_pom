@@ -109,7 +109,6 @@ class page_utils(WebElement):
 
     def get_elements_by_locator(self, *locator) -> list[WebElement]:
         try:
-            log.logger.info(f"Element {str(*locator)}")
             return self.driver.find_elements(locator[0][0], locator[0][1])
         except NoSuchElementException:
             log.logger.error(f"{str(NoSuchElementException)}  " + str(locator))

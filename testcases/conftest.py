@@ -6,13 +6,13 @@ import logging
 from pathlib import Path
 from appium import webdriver
 from utilities import config_reader
-from utilities.log_util import logger
+from utilities.log_utils import logger
 from allure_commons.types import AttachmentType
 from appium.options.common.base import AppiumOptions
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.appium_service import AppiumService, DEFAULT_PORT, DEFAULT_HOST
 
-log = logger(__name__, logging.INFO)
+# log = logger(__name__, logging.INFO)
 
 pytest_plugins = [
     "utilities.log_utils"
@@ -40,8 +40,8 @@ def appium_driver(request):
     device_caps: dict[str, any] = config_reader.load_devices_config(config_path)
     device = device_caps['device_caps']['device1']
     url = 'http://0.0.0.0:4723'
-    log.logger.info(f"url           :{url}")
-    log.logger.info(f"parent_path   :{parent_path} ")
+    logger.info(f"url           :{url}")
+    logger.info(f"parent_path   :{parent_path} ")
     driver = webdriver.Remote(command_executor=url, options=AppiumOptions().load_capabilities(device))
     request.cls.driver = driver
     driver.implicitly_wait(5)

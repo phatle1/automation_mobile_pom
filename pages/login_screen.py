@@ -1,5 +1,6 @@
 from pages.base_screen import base_screen
 from appium.webdriver.common.appiumby import AppiumBy
+from utilities.log_utils import logger, action_log_decorator
 
 
 class object_login_screen(object):
@@ -10,14 +11,8 @@ class object_login_screen(object):
     yum_sso_pass_word_txt = (AppiumBy.ID, 'password')
     yum_sso_sign_in_btn = (AppiumBy.ID, 'submit')
 
-    # login_btn = "//android.view.ViewGroup[@resource-id='Auth_LoginButton']_XPATH"
-    # hidden_menu_btn = "//android.view.ViewGroup[@resource-id='Auth_HiddenMenu']_XPATH"
-    # user_name_txt = "//android.widget.EditText[@resource-id='userId']_XPATH"
-    # login_with_pwd_btn = "//android.widget.Button[@resource-id='loginwithpwdbtn']_XPATH"
-    # pass_word_txt = "//android.widget.EditText[@resource-id='password']_XPATH"
-    # signin_btn = "//android.widget.Button[@resource-id='submit']_XPATH"
 
-
+@action_log_decorator
 class login_screen(base_screen):
     def __init__(self, driver):
         super().__init__(driver)

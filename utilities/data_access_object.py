@@ -1,5 +1,5 @@
-import requests
 import json
+import requests
 from utilities import config_reader
 
 

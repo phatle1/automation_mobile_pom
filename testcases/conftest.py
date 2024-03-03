@@ -40,8 +40,8 @@ def appium_driver(request):
     device_caps: dict[str, any] = config_reader.load_devices_config(config_path)
     device = device_caps['device_caps']['device1']
     url = 'http://0.0.0.0:4723'
-    logger.info(f"url           :{url}")
-    logger.info(f"parent_path   :{parent_path} ")
+    logger.info(f"url    :{url}")
+    logger.info(f"device :{device} ")
     driver = webdriver.Remote(command_executor=url, options=AppiumOptions().load_capabilities(device))
     request.cls.driver = driver
     driver.implicitly_wait(5)

@@ -1,8 +1,8 @@
-from appium import webdriver
-from appium.options.android import UiAutomator2Options
-from appium.webdriver.common.appiumby import AppiumBy
-import unittest
 import logging
+import unittest
+from appium import webdriver
+from appium.webdriver.common.appiumby import AppiumBy
+from appium.options.android import UiAutomator2Options
 
 # For W3C actions
 from selenium.webdriver.common.action_chains import ActionChains

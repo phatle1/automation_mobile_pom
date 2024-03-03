@@ -2,28 +2,29 @@ import logging
 from time import sleep
 from typing import List
 
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver import Keys
-from multiprocessing import TimeoutError
-from utilities.log_util import logger
 from utilities import config_reader
+from selenium.webdriver import Keys
+from utilities.log_utils import logger
+from multiprocessing import TimeoutError
 from appium.webdriver.common.appiumby import AppiumBy
-from appium.webdriver.common.touch_action import TouchAction
-from appium.webdriver.common.multi_action import MultiAction
-from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.remote.webelement import WebElement
+from appium.webdriver.common.touch_action import TouchAction
+from appium.webdriver.common.multi_action import MultiAction
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.common.exceptions import ElementNotVisibleException, NoSuchElementException, \
     StaleElementReferenceException
 
 # For W3C actions
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.actions import interaction
-from selenium.webdriver.common.actions.action_builder import ActionBuilder
-from selenium.webdriver.common.actions.pointer_input import PointerInput
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.actions import interaction
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.actions.pointer_input import PointerInput
+from selenium.webdriver.common.actions.action_builder import ActionBuilder
 
-log = logger(__name__, logging.INFO)
+
+# log = logger(__name__, logging.INFO)
 
 
 class page_utils(WebElement):
@@ -72,61 +73,19 @@ class page_utils(WebElement):
         except StaleElementReferenceException:
             pass
 
-    # def get_element_by_locator(self, *locator) -> WebElement:
-    #     try:
-    #         fluent_wait = WebDriverWait(self.driver, self.time_out, poll_frequency=5,
-    #                                     ignored_exceptions=self.exceptions)
-    #         log.logger.info(f"Element {str(locator)}")
-    #
-    #         xpath_locator = config_reader.remove_locator_extension(locator, self.XPath)
-    #         id_locator = config_reader.remove_locator_extension(locator, self.ID)
-    #         accessibility_locator = config_reader.remove_locator_extension(locator, self.ACCESSIBILITYID)
-    #         class_locator = config_reader.remove_locator_extension(locator, self.CLASS_NAME)
-    #
-    #         if str(locator).endswith(self.XPath):
-    #             return fluent_wait.until(expected_conditions.presence_of_element_located(
-    #                 locator=(AppiumBy.XPATH, xpath_locator)))
-    #         elif str(locator).endswith(self.ACCESSIBILITYID):
-    #             return fluent_wait.until(expected_conditions.presence_of_element_located(
-    #                 locator=(AppiumBy.ACCESSIBILITY_ID, accessibility_locator)))
-    #         elif str(locator).endswith(self.ID):
-    #             return fluent_wait.until(expected_conditions.presence_of_element_located(
-    #                 locator=(AppiumBy.ID, id_locator)))
-    #         elif str(locator).endswith(self.CLASS_NAME):
-    #             return fluent_wait.until(expected_conditions.presence_of_element_located(
-    #                 locator=(AppiumBy.CLASS_NAME, class_locator)))
-    #
-    #         log.logger.info(f"Element {str(locator)}")
-    #     except NoSuchElementException:
-    #         log.logger.error(f"{str(NoSuchElementException)}  " + str(locator))
-    #         pass
-    #     except StaleElementReferenceException:
-    #         log.logger.error(f"{str(StaleElementReferenceException)}  " + str(locator))
-    #         pass
-    #     except ElementNotVisibleException:
-    #         log.logger.error(f"{str(ElementNotVisibleException)}  " + str(locator))
-    #         pass
-
     def get_elements_by_locator(self, *locator) -> list[WebElement]:
         try:
             return self.driver.find_elements(locator[0][0], locator[0][1])
-        except NoSuchElementException:
-            log.logger.error(f"{str(NoSuchElementException)}  " + str(locator))
-            pass
-        except StaleElementReferenceException:
-            log.logger.error(f"{str(StaleElementReferenceException)}  " + str(locator))
-            pass
-        except ElementNotVisibleException:
-            log.logger.error(f"{str(ElementNotVisibleException)}  " + str(locator))
-            pass
+        except Exception as ex:
+            raise ex
 
     def action_tap(self, element: WebElement) -> None:
         try:
             self.wait_until_element_to_be_visible(element)
             self.wait_until_element_to_be_clickable(element)
             self.user_action.click(on_element=element).perform()
-        except self.exceptions:
-            log.logger.error(f"Element not found: {str(element)}")
+        except Exception as ex:
+            raise ex
 
     def action_tap_continuously(self, element: WebElement) -> None:
         try:
@@ -139,29 +98,29 @@ class page_utils(WebElement):
                     i += 3
 
             raise Exception('Element never became visible: %s (%s)' % (element[0], element[0]))
-        except self.exceptions:
-            log.logger.error(f"Element not found: {str(element)}")
+        except Exception as ex:
+            raise ex
 
     def action_type(self, element: WebElement, value) -> None:
         try:
             self.wait_until_element_to_be_clickable(element)
             self.user_action.click(on_element=element).perform()
             self.user_action.send_keys(value).perform()
-        except NoSuchElementException:
-            log.logger.error(f"Element not found: {str(element)}")
+        except Exception as ex:
+            raise ex
 
     def action_type_enter(self, element: WebElement):
         try:
             self.wait_until_element_to_be_clickable(element)
             self.user_action.send_keys_to_element(element, Keys.ENTER).perform()
-        except NoSuchElementException:
-            log.logger.error(f"Element not found: {str(element)}")
+        except Exception as ex:
+            raise ex
 
     def drag_and_drop(self, from_element: WebElement, to_element: WebElement):
         try:
             self.user_action.drag_and_drop(from_element, to_element).perform()
-        except NoSuchElementException:
-            log.logger.error(f"Elements not found: {str(from_element)} and {str(to_element)}")
+        except Exception as ex:
+            raise ex
 
     def click_index(self, locator, index):
         try:
@@ -172,17 +131,17 @@ class page_utils(WebElement):
                     index].click()
             elif str(locator).endswith("_ID"):
                 self.driver.find_elements_by_id(config_reader.read_config("locators: ", locator))[index].click()
-            log.logger.info("Clicking on an Element: " + str(locator) + "with index: " + str(index))
+            logger.info("Clicking on an Element: " + str(locator) + "with index: " + str(index))
         except NoSuchElementException:
-            log.logger.error("Element not found: " + str(locator))
+            logger.error("Element not found: " + str(locator))
 
     def get_text(self, element: WebElement):
         try:
             text = element.text
-            log.logger.info(f"Getting text from an element: {text}")
+            logger.info(f"Getting text from an element: {text}")
             return text
         except self.exceptions:
-            log.logger.error(f"Element not found: {str(element)}")
+            logger.error(f"Element not found: {str(element)}")
 
     def wait_until_element_to_be_visible(self, element: WebElement) -> WebElement | bool:
         try:

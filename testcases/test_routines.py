@@ -1,14 +1,14 @@
 import pytest
-from testcases.base_test import base_test
-
-from pages.login_screen import login_screen
-from pages.vendor_tool_selector_screen import vendor_tool_selector_screen
-from pages.manager_vendor_tool.store_selection_screen import store_selection_screen
-from pages.manager_vendor_tool.routines_screen import routines_screen
-from testcases.test_login import Test_Login
-
 from utilities import data_provider
 from utilities import data_access_object
+from testcases.base_test import base_test
+
+from testcases.test_login import Test_Login
+from pages.login_screen import login_screen
+from pages.manager_vendor_tool.routines_screen import routines_screen
+from pages.vendor_tool_selector_screen import vendor_tool_selector_screen
+from pages.manager_vendor_tool.store_selection_screen import store_selection_screen
+
 
 
 class Test_Routines(base_test):

@@ -4,17 +4,15 @@ from appium.webdriver import webdriver
 from testcases.base_test import base_test
 
 from pages.login_screen import login_screen
+from pages.manager_vendor_tool.routines_screen import routines_screen
 from pages.vendor_tool_selector_screen import vendor_tool_selector_screen
 from pages.manager_vendor_tool.store_selection_screen import store_selection_screen
-from pages.manager_vendor_tool.routines_screen import routines_screen
 
 from utilities import data_provider
 from utilities import data_access_object
 
 
 class Test_Login(base_test):
-
-    # @pytest.fixture(scope="function")
 
     @pytest.mark.parametrize("username,password", data_provider.get_authentication("FBA"))
     def test_login_with_valid_authentication(self, username, password):

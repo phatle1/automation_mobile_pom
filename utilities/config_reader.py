@@ -1,5 +1,5 @@
-from configparser import ConfigParser
 import json
+from configparser import ConfigParser
 
 
 def read_config(section, key):

@@ -7,7 +7,7 @@ from utilities.log_utils import logger, action_log_decorator
 
 # log = logger(__name__, logging.INFO)
 
-
+@action_log_decorator
 class base_screen:
 
     def __init__(self, driver):

@@ -2,7 +2,7 @@ import utilities
 from pages.base_screen import base_screen
 from utilities.page_util import page_utils
 from appium.webdriver.common.appiumby import AppiumBy
-from utilities.log_utils import logger, action_log_decorator
+# from utilities.log_utils import logger, action_log_decorator
 
 
 class object_login_screen(object):
@@ -14,7 +14,6 @@ class object_login_screen(object):
     yum_sso_sign_in_btn = (AppiumBy.ID, 'submit')
 
 
-@action_log_decorator
 class login_screen(base_screen):
     def __init__(self, driver):
         super().__init__(driver)

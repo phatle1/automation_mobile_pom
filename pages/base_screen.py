@@ -2,12 +2,11 @@ import logging
 from utilities.log_util import logger
 from utilities.page_util import page_utils
 from selenium.webdriver.remote.webelement import WebElement
-from utilities.log_utils import logger, action_log_decorator
+# from utilities.log_utils import logger, action_log_decorator
 
 
 # log = logger(__name__, logging.INFO)
 
-@action_log_decorator
 class base_screen:
 
     def __init__(self, driver):

@@ -31,13 +31,13 @@ appium -p 0.0.0.0:4723
 
 ## Run a testscript
 ```bash
-pytest TestCases/test_login.py --alluredir=./allure_report
+pytest testcases/test_login.py --alluredir=./allure_report
 ```
 
 ## run allure-report
 
 ```python
-allure serve ./allure-report
+allure serve ./allure_report
 ```
 
 ## BUILD DOCKER IMAGE

@@ -41,41 +41,52 @@ def action_log_decorator(cls):
             action = ''
             log_action = ''
             str_to_extract = ''
-            nested_sub_func_name = ''
+            action_log = ''
             verify = ''
             parent_path = Path(__file__).resolve().parents[1]
             temp_testcase = []
             temp_pages = []
-            for item in inspect.stack(0):
-                if f"{parent_path}/testcases" in item.filename:
-                    temp_testcase.append(item)
-                    str_to_extract = item.code_context
-                    testcase_name = item.function
-                    continue
+            for item in inspect.stack():
                 if f"{parent_path}/pages" in item.filename:
-                    temp_pages.append(item)
-                    """
                     if "self." in item.code_context:
-                        nested_sub_func_name = item.code_context[0].split("self.")[1].split("()")[0].removesuffix("\n")
+                        str_to_extract = item.code_context[0].split("self.")[1].split("()")[0].removesuffix("\n")
                     else:  # handle the called action from another class (alert_popup.)
-                        nested_sub_func_name = item.code_context[0].split(".")[1].split("()")[0].removesuffix("\n")
-                    """
-            for item in temp_pages:
-                screen_name = item.filename[slice(item.filename.rfind('/')+1, -3)]
-                if item.function.startswith('func'):
-                    pass
-                if item.function.startswith('action'):
-                    action = item.function
-                if item.function.startswith('verify'):
-                    verify = item.function
-            log_action += f'{testcase_name} - {screen_name} - {action}'
+                        str_to_extract = item.code_context[0].split(".")[1].split("()")[0].removesuffix("\n")
+
+                if f"{parent_path}/testcases" in item.filename:
+                    code_context = item.code_context
+                    called_func = code_context[0].split("(")[0]
+                    action_log = called_func.split(".")[-1]
+                    screen_name = called_func.removesuffix("." + action_log).strip()
+                    screen_name = screen_name.replace(".", " > ").replace("_", " ").title()
+                    break
+
+            if str_to_extract:
+                action_log = f"[{screen_name}] {func.__name__}"
+            else:
+                action_log = f"[{screen_name}] {action_log}"
+            if str(func_name).startswith("verify"):
+                action_log = "⛳ " + action_log
+
+            # Get parameters of the called function
+            print_args = print_kwargs = ""
+            if isinstance(func, type(lambda: 1)):
+                print_args = args[1:]
+            print_args = "', '".join(str(i) for i in print_args if i is not None)
+            if kwargs:
+                print_kwargs = ", " + ", ".join(f"{k}={v!r}" for k, v in kwargs.items())
+            action_log += f" [params: '{print_args}'{print_kwargs}]" if print_args or print_kwargs else ""
+            action_log = action_log.replace("'', ", "")  # remove redundant '' if print_args is empty
+
+            # Execute function
+            action_log += f'{testcase_name} - {screen_name} - {action}'
             start_time = time.perf_counter()  # get the current time before the action
             val = func(*args, **kwargs)  # execute the action not having values returned
             end_time = time.perf_counter()
             run_time = end_time - start_time  # measure the action's time
-            log_action += f' ran in [{'{0:.1f}s'.format(run_time)}]'
+            action_log += f' ran in [{'{0:.1f}s'.format(run_time)}]'
             # logger.info(f'{func.__name__} ran in [{'{0:.1f}s'.format(run_time)}]')
-            logger.info(log_action)
+            logger.info(action_log)
             return val
 
         return wrapper

@@ -266,10 +266,14 @@ class page_utils(WebElement):
         except TimeoutException:
             pass
 
-    def is_element_present(self, element: WebElement):
+    @staticmethod
+    def is_element_present(element: WebElement):
         try:
-            return True if self.wait_until_element_to_be_visible(
-                element) is True else False, f"Element {element.__name__} is not visible"
+            return element.is_displayed()
+            # """
+            # return True if self.wait_until_element_to_be_visible(
+            #     element) is True else False, f"Element {element.__name__} is not visible"
+            # """
 
         except NoSuchElementException:
             pass

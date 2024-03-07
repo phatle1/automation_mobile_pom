@@ -18,11 +18,11 @@
         "appium:newCommandTimeout": 3600,
         "appium:connectHardwareKeyboard": true,
         "appium:noReset": false,
-        "__appium:fullReset" :true,
         "appium:hideKeyboard": true,
+        "appium:disableIdLocatorAutocompletion": true,
+        "__appium:fullReset" :true,
         "__appium:isHeadless__": true,
         "__appium:avdArgs__": "-no-window",
-        "appium:disableIdLocatorAutocompletion": true,
         "__android:id/navigationBarBackground--": ""
     },
     "device2": {

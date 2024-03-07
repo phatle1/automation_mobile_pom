@@ -6,28 +6,37 @@ class objects_store_selection_screen(object):
     # basic store selection
     search_bar_txt = (AppiumBy.ID, 'SearchBar_TextInput')
     choose_your_restaurant_txt = (AppiumBy.XPATH, "(//android.widget.TextView)[2]")
-    logout_btn = (AppiumBy.XPATH, "(//android.widget.TextView//ancestor::android.view.ViewGroup//com.horcrux.svg.SvgView)[1]")
-    kfc_ico = (AppiumBy.XPATH, "//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup/android.view.ViewGroup[2]_XPATH")
-    pizza_hut_ico = (AppiumBy.XPATH, "//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup/android.view.ViewGroup[1]")
-    map_switcher_btn = (AppiumBy.XPATH, "(//android.widget.TextView//ancestor::android.view.ViewGroup//com.horcrux.svg.SvgView)[2]")
+    logout_btn = (
+        AppiumBy.XPATH, "(//android.widget.TextView//ancestor::android.view.ViewGroup//com.horcrux.svg.SvgView)[1]")
+    kfc_ico = (AppiumBy.XPATH,
+               "//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup/android.view.ViewGroup[2]_XPATH")
+    pizza_hut_ico = (
+        AppiumBy.XPATH,
+        "//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup/android.view.ViewGroup[1]")
+    map_switcher_btn = (
+        AppiumBy.XPATH, "(//android.widget.TextView//ancestor::android.view.ViewGroup//com.horcrux.svg.SvgView)[2]")
 
     # store selection with map
     map_area = (AppiumBy.XPATH, "(//android.widget.RelativeLayout)[2]")
     zoom_in_btn = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='Zoom in']")
     zoom_out_btn = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='Zoom out']")
     my_location_btn = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='My Location']")
-    first_store_selection = (AppiumBy.XPATH, "//android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[1]")
+    first_store_selection = (
+        AppiumBy.XPATH, "//android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[1]")
 
     # confirmation screen
     yes_btn = (AppiumBy.ID, "Store_Yes")
+    no_logout_btn = (AppiumBy.XPATH,
+                     '(//android.view.ViewGroup[@resource-id="Store_Yes"]//following-sibling::android.view.ViewGroup)[2]')
 
     @staticmethod
     def welcome_lbl(user_first_name):
-        return AppiumBy.XPATH, f"//android.widget.TextView[@text='Hi {user_first_name}!']"
+        a = f"//android.widget.TextView[@text='Hi {user_first_name}!']"
+        return AppiumBy.XPATH, f'//android.widget.TextView[@text=\"Hi {user_first_name}!\"]'
 
     @staticmethod
     def store_selection_lbl(internal_store_number):
-        return AppiumBy.XPATH, f"//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup//android.widget.ScrollView//*[@resource-id='StoreListItemNative_{internal_store_number}']"
+        return AppiumBy.XPATH, f"//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup//android.widget.ScrollView//*[@resource-id\='StoreListItemNative_{internal_store_number}\']"
 
 
 class store_selection_screen(base_screen):
@@ -65,9 +74,25 @@ class store_selection_screen(base_screen):
     def get_yes_btn(self):
         return self.get_element_by_locator(objects_store_selection_screen.yes_btn)
 
+    # Action
+    def action_input_to_store_search_bar(self, store_id):
+        return self.action_type(self.get_search_bar_txt(), store_id)
+
+    def action_tap_on_store_to_select(self):
+        return self.action_tap(self.get_first_store_selection())
+
+    def action_tap_on_yes_btn(self):
+        return self.action_tap(self.get_yes_btn())
+
     # Verify section
     def verify_user_log_in_successful(self):
         assert self.is_element_present(self.get_choose_your_restaurant_txt())
 
     def verify_user_logged_in_successfully(self, user_first_name):
-        assert self.is_element_present(self.get_welcome_lbl(user_first_name)) is True, 'The expected result is not matches with actual'
+        element = self.get_welcome_lbl(user_first_name)
+        assert self.is_element_present(element) is True, 'The expected result is not matches with actual'
+
+    def func_navigate_to_main_page(self):
+        self.action_input_to_store_search_bar('84P18111')
+        self.action_tap_on_store_to_select()
+        self.action_tap_on_yes_btn()

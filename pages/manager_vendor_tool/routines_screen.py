@@ -8,7 +8,7 @@ class objects_checklist_screen(object):
     checklist_history_lbl = (AppiumBy.XPATH, '//android.widget.TextView[@text="HISTORY"]')
 
     # checklist items
-    all_routine_main_items_lbl = (AppiumBy.XPATH,
+    all_current_routine_items_lbl = (AppiumBy.XPATH,
                                   '((//android.view.ViewGroup[@resource-id="RoutineGroup_RoutineGroupItems"])[1]//*[contains(@resource-id,"RoutineGroupItem@")])/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.widget.TextView[1]')
     checklist_item_top_menu_lbl = (AppiumBy.XPATH, '//android.widget.HorizontalScrollView//android.widget.TextView')
 
@@ -37,12 +37,19 @@ class routines_screen(base_screen):
     def get_routine_by_name(self, routine_name):
         return self.get_element_by_locator(objects_checklist_screen.routine_by_name(routine_name))
 
-    def get_all_routine_main_items_lbl(self):
-        return self.get_elements_by_locator(objects_checklist_screen.all_routine_main_items_lbl)
+    def get_all_current_routine_items_lbl(self):
+        return self.get_elements_by_locator(objects_checklist_screen.all_current_routine_items_lbl)
 
     def get_checklist_item_top_menu_lbl(self):
         return self.get_elements_by_locator(objects_checklist_screen.checklist_item_top_menu_lbl)
 
-    def action_fill_all_checklist_items(self):
-        for item in self.get_all_routine_main_items_lbl():
-            print(str(item))
+    # Action
+    def action_select_routine_screen(self):
+        return self.action_tap(self.get_checklist_bottom_bar_btn())
+
+    def func_fill_all_checklist_items(self):
+        self.action_select_routine_screen()
+        for main_routines in self.get_all_current_routine_items_lbl():
+            self.action_tap(main_routines)
+            for checklist_items in self.get_checklist_item_top_menu_lbl():
+                self.action_tap(checklist_items)

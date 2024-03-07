@@ -53,6 +53,9 @@ class base_screen:
         return self.page_utils.is_textbox_filled_by_value(element, value)
 
     def is_element_present(self, element: WebElement):
+        return self.page_utils.is_element_present(element)
+
+    def wait_until_element_to_be_visible(self, element: WebElement):
         return self.page_utils.wait_until_element_to_be_visible(element)
 
     def wait_until_element_disappeared(self, element: WebElement):

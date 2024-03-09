@@ -46,8 +46,8 @@ class base_screen:
     def scroll_to_element(self, locator):
         self.page_utils.scroll_to_element(self, locator)
 
-    def swipe_horizontal(self, direction, times):
-        self.page_utils.swipe_horizontal(self, direction, times)
+    def swipe_vertical(self, *locator):
+        self.page_utils.swipe_vertical_to_element(*locator)
 
     def is_element_filled_by_inputted_value(self, element: WebElement, value):
         return self.page_utils.is_textbox_filled_by_value(element, value)

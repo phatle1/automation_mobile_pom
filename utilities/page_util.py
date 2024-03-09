@@ -1,6 +1,7 @@
 import logging
+import time
 from time import sleep
-from typing import List
+from typing import List, Any
 
 from utilities import config_reader
 from selenium.webdriver import Keys
@@ -73,9 +74,15 @@ class page_utils(WebElement):
         except StaleElementReferenceException:
             pass
 
-    def get_elements_by_locator(self, *locator) -> list[WebElement]:
+    def get_elements_by_locator(self, *locator) -> WebElement:
         try:
-            return self.driver.find_elements(locator[0][0], locator[0][1])
+            i = 0
+            while i < self.time_out:
+                element = self.driver.find_elements(locator[0][0], locator[0][1])
+                if element is not None:
+                    return element
+                time.sleep(1)
+                i += 3
         except Exception as ex:
             raise ex
 
@@ -219,13 +226,43 @@ class page_utils(WebElement):
         except TimeoutException:
             pass
 
-    @staticmethod
-    def swipe_horizontal(direction, locator, times):
+    def swipe_vertical_to_element(self, *locator):
         try:
-            if str(direction).lower() == 'right':
-                pass
-            elif str(direction).lower() == 'left':
-                pass
+            window_size = self.driver.get_window_size()
+            width = window_size["width"]
+            height = window_size["height"]
+            start_x = width / 2
+            start_y = height / 2
+
+            end_x = start_x
+            end_y = height / 2 - 20
+            # 482, 1831
+            # 499, 1287
+
+            # element = self.get_element_by_locator(*locator)
+            is_swipe = True
+            while is_swipe:
+                try:
+                    self.user_action.w3c_actions = ActionBuilder(self.driver,
+                                                                 mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
+                    self.user_action.w3c_actions.pointer_action.move_to_location(x=start_x, y=start_y)
+                    self.user_action.w3c_actions.pointer_action.pointer_down()
+                    self.user_action.w3c_actions.pointer_action.move_to_location(x=end_x, y=end_y)
+                    self.user_action.w3c_actions.pointer_action.release()
+                    self.user_action.perform()
+
+                    action = TouchAction(self.driver)
+                    el = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.NAME, loc)))
+                    action.press(el).move_to(x=10, y=-500).release().perform()
+
+
+                    element = self.get_elements_by_locator(*locator)
+                    if len(element) > 0:
+                        is_swipe = False
+
+                except NoSuchElementException:
+                    pass
+
         except NoSuchElementException:
             pass
         except StaleElementReferenceException:

@@ -84,15 +84,27 @@ class store_selection_screen(base_screen):
     def action_tap_on_yes_btn(self):
         return self.action_tap(self.get_yes_btn())
 
+    def action_check_user_logged_in_successfully(self, user_first_name):
+        element = self.get_welcome_lbl(user_first_name)
+        flag: bool
+        if len(element) > 0:
+            flag = True
+        else:
+            flag = False
+        return flag
+        # flag = True if len(element) > 0 else False
+        # return flag
+
     # Verify section
     def verify_user_log_in_successful(self):
         assert self.is_element_present(self.get_choose_your_restaurant_txt())
 
-    def verify_user_logged_in_successfully(self, user_first_name):
-        element = self.get_welcome_lbl(user_first_name)
-        assert self.is_element_present(element) is True, 'The expected result is not matches with actual'
+    def func_navigate_to_main_page(self, user_first_name):
+        is_user_logged_in = self.action_check_user_logged_in_successfully(user_first_name=user_first_name)
+        if not is_user_logged_in:
+            self.action_input_to_store_search_bar('84P18111')
+            self.action_tap_on_store_to_select()
+            self.action_tap_on_yes_btn()
+        else:
+            pass
 
-    def func_navigate_to_main_page(self):
-        self.action_input_to_store_search_bar('84P18111')
-        self.action_tap_on_store_to_select()
-        self.action_tap_on_yes_btn()

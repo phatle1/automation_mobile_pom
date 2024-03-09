@@ -2,7 +2,8 @@
   "device_caps": {
     "device1": {
       "platformName": "Android",
-        "appium:deviceName": "emulator-5554",
+        "__appium:deviceName": "emulator-5554",
+        "appium:deviceName": "l7bunn4h69lfxc8d",
         "appium:automationName": "UiAutomator2",
         "appium:app": "/Users/lephat/Downloads/signed.apk",
         "appium:appPackage": "io.pizzahut.hutbot.qa",

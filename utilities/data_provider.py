@@ -121,4 +121,5 @@ def collect_usable_record_from_routine_file(file):
         print(routines)
 
 
-# test = iter_excel_openpyxl_without_build_in(routines_file)
+if __name__ == '__main__':
+    collect_usable_record_from_routine_file(routines_file)

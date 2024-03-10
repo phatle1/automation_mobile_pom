@@ -36,7 +36,7 @@ class page_utils(WebElement):
         self.CLASS_NAME = "_CLASS_NAME"
         self.ID = "_ID"
         self.user_action = ActionChains(driver)
-        self.time_out: int = 30
+        self.time_out: int = 40
         self.exceptions = [ElementNotVisibleException, NoSuchElementException, StaleElementReferenceException]
         # self.web_element = WebElement(driver)
 
@@ -60,29 +60,31 @@ class page_utils(WebElement):
         elif method == 'android':
             return self.driver.find_element_by_android_uiautomator('new UiSelector().%s' % value)
 
-    def get_element_by_locator(self, *locator) -> WebElement:
+    def get_element_by_locator(self, *locator) -> WebElement | None:
         try:
-            fluent_wait = WebDriverWait(self.driver, self.time_out, poll_frequency=5,
+            fluent_wait = WebDriverWait(self.driver, self.time_out, poll_frequency=3,
                                         ignored_exceptions=self.exceptions)
             return fluent_wait.until(
                 expected_conditions.presence_of_element_located(locator=(locator[0][0], locator[0][1])))
 
         except NoSuchElementException:
-            pass
+            return None
         except ElementNotVisibleException:
-            pass
+            return None
         except StaleElementReferenceException:
-            pass
+            return None
 
-    def get_elements_by_locator(self, *locator) -> WebElement:
+    def get_elements_by_locator(self, *locator) -> Any | None:
         try:
             i = 0
             while i < self.time_out:
                 element = self.driver.find_elements(locator[0][0], locator[0][1])
                 if element is not None:
                     return element
+
                 time.sleep(1)
                 i += 3
+                return element
         except Exception as ex:
             raise ex
 
@@ -104,7 +106,7 @@ class page_utils(WebElement):
                     sleep(1)
                     i += 3
 
-            raise Exception('Element never became visible: %s (%s)' % (element[0], element[0]))
+            raise Exception('Element never became visible:')
         except Exception as ex:
             raise ex
 
@@ -144,8 +146,12 @@ class page_utils(WebElement):
 
     def get_text(self, element: WebElement):
         try:
-            text = element.text
-            logger.info(f"Getting text from an element: {text}")
+            text = ''
+            if element.text is not None:
+                text = element.text
+            else:
+                text = ''
+            logger.info(f"Getting text from element: {text}")
             return text
         except self.exceptions:
             logger.error(f"Element not found: {str(element)}")
@@ -216,7 +222,7 @@ class page_utils(WebElement):
                 except NoSuchElementException:
                     sleep(1)
                     i += 1
-            raise Exception('Element never became visible: %s (%s)' % (element[0], element[0]))
+            raise Exception(f'Element never became visible: ')
         except NoSuchElementException:
             pass
         except StaleElementReferenceException:
@@ -233,67 +239,22 @@ class page_utils(WebElement):
             height = window_size["height"]
             start_x = width / 2
             start_y = height / 2
-
             end_x = start_x
-            end_y = height / 2 - 20
-            # 482, 1831
-            # 499, 1287
-
-            # element = self.get_element_by_locator(*locator)
+            end_y = start_y - 300
             is_swipe = True
             while is_swipe:
                 try:
-                    self.user_action.w3c_actions = ActionBuilder(self.driver,
-                                                                 mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
+                    self.user_action.w3c_actions = ActionBuilder(self.driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
                     self.user_action.w3c_actions.pointer_action.move_to_location(x=start_x, y=start_y)
                     self.user_action.w3c_actions.pointer_action.pointer_down()
                     self.user_action.w3c_actions.pointer_action.move_to_location(x=end_x, y=end_y)
                     self.user_action.w3c_actions.pointer_action.release()
                     self.user_action.perform()
-
-                    action = TouchAction(self.driver)
-                    el = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.NAME, loc)))
-                    action.press(el).move_to(x=10, y=-500).release().perform()
-
-
                     element = self.get_elements_by_locator(*locator)
                     if len(element) > 0:
                         is_swipe = False
-
                 except NoSuchElementException:
                     pass
-
-        except NoSuchElementException:
-            pass
-        except StaleElementReferenceException:
-            pass
-        except ElementNotVisibleException:
-            pass
-        except TimeoutException:
-            pass
-
-    def scroll_to_element(self, locator):
-        element = self.get_elements(locator)
-        try:
-            element
-
-        except NoSuchElementException:
-            pass
-        except StaleElementReferenceException:
-            pass
-        except ElementNotVisibleException:
-            pass
-        except TimeoutException:
-            pass
-
-    def long_press(self):
-        pass
-
-    @staticmethod
-    def verify_equal(expected, actual):
-        try:
-            return True if (expected == actual) else False, f"{expected} is not equal {actual}"
-
         except NoSuchElementException:
             pass
         except StaleElementReferenceException:

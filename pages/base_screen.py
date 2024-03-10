@@ -35,7 +35,7 @@ class base_screen:
         self.page_utils.click_index(locator, index)
 
     def get_text(self, locator):
-        self.page_utils.get_text(locator)
+        return self.page_utils.get_text(locator)
 
     def is_visible(self, locator):
         self.page_utils.wait_until_element_to_be_visible(locator)
@@ -46,7 +46,7 @@ class base_screen:
     def scroll_to_element(self, locator):
         self.page_utils.scroll_to_element(self, locator)
 
-    def swipe_vertical(self, *locator):
+    def swipe_vertical_to_element(self, *locator):
         self.page_utils.swipe_vertical_to_element(*locator)
 
     def is_element_filled_by_inputted_value(self, element: WebElement, value):

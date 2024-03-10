@@ -29,6 +29,6 @@ class base_test:
         vendor_tool.action_tap_vendor_tool('manager')
 
         user_first_name = (data_access_object.get_user_information(username))
-        # store_selection.func_navigate_to_main_page(user_first_name['First Name'])
+        store_selection.func_navigate_to_main_page(user_first_name['First Name'])
         yield
         print('log out')

@@ -23,6 +23,7 @@ class objects_store_selection_screen(object):
     my_location_btn = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='My Location']")
     first_store_selection = (
         AppiumBy.XPATH, "//android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[1]")
+    regular_store_selection_ico = (AppiumBy.XPATH, '(//com.horcrux.svg.SvgView)[2]')
 
     # confirmation screen
     yes_btn = (AppiumBy.ID, "Store_Yes")
@@ -54,7 +55,7 @@ class store_selection_screen(base_screen):
         return self.get_element_by_locator(objects_store_selection_screen.kfc_ico)
 
     def get_my_location_btn(self):
-        return self.get_element_by_locator(objects_store_selection_screen.my_location_btn)
+        return self.get_elements_by_locator(objects_store_selection_screen.my_location_btn)
 
     def get_first_store_selection(self):
         return self.get_element_by_locator(objects_store_selection_screen.first_store_selection)
@@ -74,6 +75,9 @@ class store_selection_screen(base_screen):
     def get_yes_btn(self):
         return self.get_element_by_locator(objects_store_selection_screen.yes_btn)
 
+    def get_regular_store_selection_ico(self):
+        return self.get_element_by_locator(objects_store_selection_screen.regular_store_selection_ico)
+
     # Action
     def action_input_to_store_search_bar(self, store_id):
         return self.action_type(self.get_search_bar_txt(), store_id)
@@ -83,6 +87,9 @@ class store_selection_screen(base_screen):
 
     def action_tap_on_yes_btn(self):
         return self.action_tap(self.get_yes_btn())
+
+    def action_tap_regular_store_selection_ico(self):
+        return self.action_tap(self.get_regular_store_selection_ico())
 
     def action_check_user_logged_in_successfully(self, user_first_name):
         element = self.get_welcome_lbl(user_first_name)
@@ -100,11 +107,22 @@ class store_selection_screen(base_screen):
         assert self.is_element_present(self.get_choose_your_restaurant_txt())
 
     def func_navigate_to_main_page(self, user_first_name):
-        is_user_logged_in = self.action_check_user_logged_in_successfully(user_first_name=user_first_name)
-        if not is_user_logged_in:
-            self.action_input_to_store_search_bar('84P18111')
-            self.action_tap_on_store_to_select()
-            self.action_tap_on_yes_btn()
+        is_on_map = self.get_my_location_btn()
+        store_id = '84P18111'
+        if is_on_map is not None:
+            self.action_tap_regular_store_selection_ico()
+            self.func_select_specific_store(store_id)
+        elif len(is_on_map) > 0:
+            self.func_select_specific_store(store_id)
         else:
             pass
+
+    def func_select_specific_store(self, store_id='84P18111'):
+        try:
+            self.action_input_to_store_search_bar(store_id)
+            self.action_tap_on_store_to_select()
+            self.action_tap_on_yes_btn()
+        except Exception:
+            pass
+
 

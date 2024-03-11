@@ -60,19 +60,19 @@ class page_utils(WebElement):
         elif method == 'android':
             return self.driver.find_element_by_android_uiautomator('new UiSelector().%s' % value)
 
-    def get_element_by_locator(self, *locator) -> WebElement | None:
+    def get_element_by_locator(self, *locator) -> WebElement:
         try:
+            locator = (locator[0][0], locator[0][1])
             fluent_wait = WebDriverWait(self.driver, self.time_out, poll_frequency=3,
                                         ignored_exceptions=self.exceptions)
-            return fluent_wait.until(
-                expected_conditions.presence_of_element_located(locator=(locator[0][0], locator[0][1])))
+            return fluent_wait.until(expected_conditions.presence_of_element_located(locator=locator))
 
         except NoSuchElementException:
-            return None
+            pass
         except ElementNotVisibleException:
-            return None
+            pass
         except StaleElementReferenceException:
-            return None
+            pass
 
     def get_elements_by_locator(self, *locator) -> Any | None:
         try:
@@ -162,19 +162,19 @@ class page_utils(WebElement):
                                         ignored_exceptions=self.exceptions)
             return fluent_wait.until(expected_conditions.visibility_of(element=element))
         except NoSuchElementException:
-            pass
+            raise NoSuchElementException
         except StaleElementReferenceException:
-            pass
+            raise StaleElementReferenceException
         except ElementNotVisibleException:
-            pass
+            raise ElementNotVisibleException
         except TimeoutException:
-            pass
+            raise TimeoutException
 
     def wait_until_element_to_be_clickable(self, element: WebElement):
         try:
             fluent_wait = WebDriverWait(self.driver, self.time_out, poll_frequency=5,
                                         ignored_exceptions=self.exceptions)
-            fluent_wait.until(expected_conditions.element_to_be_clickable(element))
+            return fluent_wait.until(expected_conditions.element_to_be_clickable(element))
         except NoSuchElementException:
             pass
         except StaleElementReferenceException:

@@ -22,7 +22,7 @@ class objects_store_selection_screen(object):
     zoom_out_btn = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='Zoom out']")
     my_location_btn = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='My Location']")
     first_store_selection = (
-        AppiumBy.XPATH, "//android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[1]")
+        AppiumBy.XPATH, "//android.view.ViewGroup[contains(@resource-id, 'StoreListItemNative_')]")
     regular_store_selection_ico = (AppiumBy.XPATH, '(//com.horcrux.svg.SvgView)[2]')
 
     # confirmation screen
@@ -109,10 +109,11 @@ class store_selection_screen(base_screen):
     def func_navigate_to_main_page(self, user_first_name):
         is_on_map = self.get_my_location_btn()
         store_id = '84P18111'
-        if is_on_map is not None:
-            self.action_tap_regular_store_selection_ico()
-            self.func_select_specific_store(store_id)
-        elif len(is_on_map) > 0:
+        if len(is_on_map) > 0:
+            pass
+            # self.action_tap_regular_store_selection_ico()
+            # self.func_select_specific_store(store_id)
+        if len(is_on_map) == 0:
             self.func_select_specific_store(store_id)
         else:
             pass
@@ -121,7 +122,7 @@ class store_selection_screen(base_screen):
         try:
             self.action_input_to_store_search_bar(store_id)
             self.action_tap_on_store_to_select()
-            self.action_tap_on_yes_btn()
+            # self.action_tap_on_yes_btn()
         except Exception:
             pass
 

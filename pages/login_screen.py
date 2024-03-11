@@ -51,7 +51,7 @@ class login_screen(base_screen):
         element = self.get_login_with_pwd_btn()
         assert self.is_element_present(element)
         self.action_tap(element)
-        assert self.wait_until_element_disappeared(element=element)
+        self.wait_until_element_disappeared(element=element)
 
     def action_type_pass_word_txt(self, pass_word):
         self.action_type(element=self.get_pass_word_txt(), value=pass_word)

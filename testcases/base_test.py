@@ -6,16 +6,7 @@ from pages.vendor_tool_selector_screen import vendor_tool_selector_screen
 from pages.manager_vendor_tool.store_selection_screen import store_selection_screen
 
 
-# @pytest.fixture
-# def log_in_out(username, password):
-#     print(f"log in {username}/{password}")
-#     assert 1 == 1
-#     yield
-#     print("log out")
-#     assert 1 == 1
-
-
-@pytest.mark.flaky(reruns=1)
+# @pytest.mark.flaky(reruns=1)
 @pytest.mark.usefixtures("appium_driver", "log_on_failure")
 class base_test:
     @pytest.fixture
@@ -28,7 +19,7 @@ class base_test:
         login_home_screen.func_login(user_name=username, pass_word=password)
         vendor_tool.action_tap_vendor_tool('manager')
 
-        user_first_name = (data_access_object.get_user_information(username))
+        user_first_name = (data_access.get_user_information(username))
         store_selection.func_navigate_to_main_page(user_first_name['First Name'])
         yield
         print('log out')

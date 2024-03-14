@@ -35,11 +35,13 @@ def pytest_runtest_makereport(item, call):
 def appium_driver(request):
     service_device = AppiumService()
     # service_device.start(args=['-p', '4723', '--base-path', '/', '--session-override'])
+
     parent_path = Path(__file__).resolve().parents[1]
     config_path = f'{parent_path}/configuration_data/devices_config.json'
     device_caps: dict[str, any] = config_reader.load_devices_config(config_path)
+
     device = device_caps['device_caps']['device1']
-    url = 'http://0.0.0.0:4723'
+    url = 'http://127.0.0.1:4444/'
     logger.info(f"appPackage :{device['appium:appPackage']}")
     logger.info(f"device_id  :{device['appium:deviceName']} ")
     driver = webdriver.Remote(command_executor=url, options=AppiumOptions().load_capabilities(device))

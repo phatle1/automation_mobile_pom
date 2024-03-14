@@ -93,4 +93,35 @@ nano ~/.zshrc
 
 ```
 
+## Run config for selenium grid
+```bash
+#create event-bus:
+java -jar selenium-server-4.18.1.jar event-bus --publish-events tcp://192.168.1.6:4442 --subscribe-events tcp://192.168.1.6:4443 --port 5557
 
+#create sessionqueue:
+java -jar selenium-server-4.18.1.jar sessionqueue --port 5559
+
+#create sessions:
+java -jar selenium-server-4.18.1.jar sessions --publish-events tcp://192.168.1.6:4442 --subscribe-events tcp://192.168.1.6:4443 --port 5556
+
+#create distributor:
+java -jar selenium-server-4.18.1.jar distributor --publish-events tcp://192.168.1.6:4442 --subscribe-events tcp://192.168.1.6:4443 --sessions http://192.168.1.6:5556 --sessionqueue http://192.168.1.6:5559 --port 5553 --bind-bus false
+
+#create router:
+java -jar selenium-server-4.18.1.jar router --sessions http://192.168.1.6:5556 --distributor http://192.168.1.6:5553 --sessionqueue http://192.168.1.6:5559 --port 4444
+
+#create node
+java -jar selenium-server-4.18.1.jar node --publish-events tcp://192.168.1.6:4442 --subscribe-events tcp://192.168.1.6:4443
+```
+
+
+## Run config for selenium grid using config file
+```bash
+cd /Users/lephat/PycharmProjects/automation_mobile_pom/selenium_grid
+appium --config appium1.yml
+appium --config appium2.yml
+java -jar selenium-server-4.18.1.jar node --config node_emulator.toml
+java -jar selenium-server-4.18.1.jar node --config node_realdevice.toml
+java -jar selenium-server-4.18.1.jar hub
+
+```

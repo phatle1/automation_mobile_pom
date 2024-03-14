@@ -1,0 +1,17 @@
+#node-emulator1.toml
+[server]
+port = 5555
+
+[node]
+detect-drivers = false
+
+[relay]
+url = "http://127.0.0.1:4723/"
+status-endpoint = "/status"
+configs = [
+    "1", "{\"platformName\": \"Android\",\"appium:deviceName\": \"emulator-5554\", \"appium:automationName\": \"UiAutomator2\"}"
+]
+
+#[[relay.configs]]
+#max-sessions = 2
+#stereotype = '{"platformName":"Android","appium:automationName":"UIAutomator2","appium:udid":"emulator-5554"}'

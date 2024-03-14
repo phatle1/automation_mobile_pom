@@ -1,11 +1,11 @@
 {
   "device_caps": {
     "device1": {
-      "platformName": "Android",
+        "platformName": "Android",
         "appium:deviceName": "emulator-5554",
         "__appium:deviceName": "l7bunn4h69lfxc8d",
         "appium:automationName": "UiAutomator2",
-        "appium:app": "/Users/lephat/Downloads/signed.apk",
+        "appium:app": "/Users/lephat/PycharmProjects/automation_mobile_pom/apks/signed.apk",
         "appium:appPackage": "io.pizzahut.hutbot.qa",
         "appium:appActivity": "io.yum.MainActivity",
         "appium:uiautomator2ServerInstallTimeout": 150000,
@@ -27,10 +27,10 @@
         "__android:id/navigationBarBackground--": ""
     },
     "device2": {
-      "platformName": "Android",
-        "appium:deviceName": "emulator-5556",
+        "platformName": "Android",
+        "appium:deviceName": "l7bunn4h69lfxc8d",
         "appium:automationName": "UiAutomator2",
-        "appium:app": "/Users/lephat/Downloads/signed.apk",
+        "appium:app": "/Users/lephat/PycharmProjects/automation_mobile_pom/apks/signed.apk",
         "appium:appPackage": "io.pizzahut.hutbot.qa",
         "appium:appActivity": "io.yum.MainActivity",
         "appium:uiautomator2ServerInstallTimeout": 150000,
@@ -43,8 +43,9 @@
         "appium:ensureWebviewsHavePages": true,
         "appium:newCommandTimeout": 3600,
         "appium:connectHardwareKeyboard": true,
-        "appium:noReset": true,
+        "appium:noReset": false,
         "appium:hideKeyboard": true,
+        "appium:disableIdLocatorAutocompletion": true,
         "__appium:isHeadless__": true,
         "__appium:avdArgs__": "-no-window"
     }

@@ -1,4 +1,3 @@
-# appium1.yml
 server:
   port: 4723
   use-drivers:

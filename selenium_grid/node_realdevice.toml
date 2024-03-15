@@ -1,20 +1,12 @@
-#node-realdevice.toml
 [server]
-port = 5556
+port = 5561
 
 [node]
 detect-drivers = false
 
 [relay]
-url = "http://127.0.0.1:4725/"
+url = "http://127.0.0.1:4725"
 status-endpoint = "/status"
 configs = [
-    "1", "{\"platformName\": \"Android\",\"appium:deviceName\": \"emulator-5556\", \"appium:automationName\": \"UiAutomator2\"}"
+    "1", "{\"appium:platformName\": \"Android\",\"appium:deviceName\": \"emulator-5556\", \"appium:automationName\": \"UiAutomator2\"}"
 ]
-#configs = [
-#    "1", "{\"platformName\": \"Android\",\"appium:deviceName\": \"l7bunn4h69lfxc8d\", \"appium:automationName\": \"UiAutomator2\"}"
-#]
-
-#[[relay.configs]]
-#max-sessions = 2
-#stereotype = '{"platformName":"Android","appium:automationName":"UIAutomator2","appium:udid":"l7bunn4h69lfxc8d"}'

@@ -27,7 +27,7 @@
         "__android:id/navigationBarBackground--": ""
     },
     "device2": {
-        "platformName": "Android",
+        "appium:platformName": "Android",
         "appium:deviceName": "l7bunn4h69lfxc8d",
         "appium:automationName": "UiAutomator2",
         "appium:app": "/Users/lephat/PycharmProjects/automation_mobile_pom/apks/signed.apk",

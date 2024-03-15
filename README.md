@@ -123,5 +123,9 @@ appium --config appium2.yml
 java -jar selenium-server-4.18.1.jar node --config node_emulator.toml
 java -jar selenium-server-4.18.1.jar node --config node_realdevice.toml
 java -jar selenium-server-4.18.1.jar hub
+```
 
+## Run on Browser Stack
+```bash
+browserstack-sdk pytest -s testcases/test_routines.py
 ```

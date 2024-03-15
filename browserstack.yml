@@ -1,0 +1,24 @@
+userName: phatle_afrz7u
+accessKey: zj4zjb2ZMjDn9nzzezPv
+framework: pytest
+app: bs://ea2b00215b9c4d4e7aee4f96c905c58aab1e72df
+platforms:
+  - platformName: android
+    deviceName: Samsung Galaxy S23 Ultra
+    platformVersion: 13.0
+  - platformName: android
+    deviceName: Xiaomi Redmi Note 11
+    platformVersion: 11.0
+  - platformName: android
+    deviceName: Oppo Reno 6
+    platformVersion: 11.0
+parallelsPerPlatform: 1        
+browserstackLocal: false
+buildName: bstack-demo
+projectName: HutBot E2E
+buildIdentifier: ${BUILD_NUMBER}
+testObservability: true
+debug: true
+networkLogs: true
+percy: false
+percyCaptureMode: auto

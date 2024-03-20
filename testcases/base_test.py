@@ -6,10 +6,10 @@ from pages.vendor_tool_selector_screen import vendor_tool_selector_screen
 from pages.manager_vendor_tool.store_selection_screen import store_selection_screen
 
 
-# @pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=1)
 @pytest.mark.usefixtures("appium_driver", "log_on_failure")
 class base_test:
-    @pytest.fixture
+    @pytest.fixture(scope="function")
     def log_in_out(self, username, password):
         login_home_screen = login_screen(self.driver)
         data_access = data_access_object

@@ -19,6 +19,10 @@ pytest_plugins = [
 ]
 
 
+def pytest_addoption(parser):
+    parser.addoption("--browser--")
+
+
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_makereport(item, call):
     outcome = yield
@@ -27,12 +31,9 @@ def pytest_runtest_makereport(item, call):
     return rep
 
 
-# adb shell
-# dumpsys window displays | grep -E ‘mCurrentFocus’
-# io.pizzahut.hutbot.qa/io.yum.MainActivity
-
 @pytest.fixture(scope="function")
 def appium_driver(request):
+    global driver
     service_device = AppiumService()
     # service_device.start(args=['-p', '4723', '--base-path', '/', '--session-override'])
 
@@ -40,22 +41,22 @@ def appium_driver(request):
     config_path = f'{parent_path}/configuration_data/devices_config.json'
     device_caps: dict[str, any] = config_reader.load_devices_config(config_path)
 
-    device = device_caps['device_caps']['device1']
-    url = 'http://127.0.0.1:4444'
+    device = device_caps['device_caps']['device2']
+    url = 'http://127.0.0.1:4723'
     logger.info(f"appPackage :{device['appium:appPackage']}")
     logger.info(f"device_id  :{device['appium:deviceName']} ")
     driver = webdriver.Remote(command_executor=url, options=AppiumOptions().load_capabilities(device))
-    request.cls.driver = driver
+
     driver.implicitly_wait(5)
+    request.cls.driver = driver
     yield driver
     driver.quit()
     service_device.stop()
 
 
 @pytest.fixture
-def log_on_failure(request, appium_driver):
+def log_on_failure(request):
     yield
     item = request.node
-    driver = appium_driver
     if item.rep_call.failed:
-        allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
+        allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)

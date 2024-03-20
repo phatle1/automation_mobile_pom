@@ -6,6 +6,8 @@
 - Pycharm: https://www.jetbrains.com/pycharm/.
 - Appium Server GUI/CLI
 - Android Studio/AVD stand alone:
+- compatible version: Appium v2.0.0
+- compatible version: uiautomator2@3.0.3
 
 
 - To install required library.
@@ -29,14 +31,36 @@ emulator -no-window -no-audio @Android34
 appium -p 0.0.0.0:4723
 ```
 
+
+## inspect current apk
+```bash
+adb shell
+dumpsys window displays | grep -E ‘mCurrentFocus’
+io.pizzahut.hutbot.qa/io.yum.MainActivity
+```
+
+
 ## Run a testscript
 ```bash
 pytest testcases/test_login.py --alluredir=./allure_report
+#to see output, will get both pass and fail shown in results
+-rA
+#to see more details in result(v = verbose)
+-v
+#keyword matching test will run
+-k routine
+#use regular expression
+-k "routine or login"
+-k "not routine"
+#use with marker
+-m smoke
+-k "smoke or regression"
 ```
 
 ## run allure-report
 
-```python
+## Run a testscript
+```bash
 allure serve ./allure_report
 ```
 
@@ -82,6 +106,12 @@ adb shell dumpsys window | grep -E 'mCurrentFocus'
 5 - Set Java Home 
 ```
 
+## Activate venv
+```bash
+python3 -m venv env                    
+source env/bin/activate                                                       
+pip3 install -r requirements.txt
+```
 
 ## Modifying .bash_profile or .zprofile (to set *_HOME manually)
 ```bash

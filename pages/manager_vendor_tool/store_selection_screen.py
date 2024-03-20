@@ -4,7 +4,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 
 class objects_store_selection_screen(object):
     # basic store selection
-    search_bar_txt = (AppiumBy.ID, 'SearchBar_TextInput')
+    search_bar_txt = (AppiumBy.XPATH, '//android.widget.EditText[@text="Search by name or ID"]')
     choose_your_restaurant_txt = (AppiumBy.XPATH, "(//android.widget.TextView)[2]")
     logout_btn = (
         AppiumBy.XPATH, "(//android.widget.TextView//ancestor::android.view.ViewGroup//com.horcrux.svg.SvgView)[1]")
@@ -33,11 +33,11 @@ class objects_store_selection_screen(object):
     @staticmethod
     def welcome_lbl(user_first_name):
         a = f"//android.widget.TextView[@text='Hi {user_first_name}!']"
-        return AppiumBy.XPATH, f'//android.widget.TextView[@text=\"Hi {user_first_name}!\"]'
+        return AppiumBy.XPATH, f'//android.widget.TextView[@text="Hi {user_first_name}!"]'
 
     @staticmethod
     def store_selection_lbl(internal_store_number):
-        return AppiumBy.XPATH, f"//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup//android.widget.ScrollView//*[@resource-id\='StoreListItemNative_{internal_store_number}\']"
+        return AppiumBy.XPATH, f"//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup//android.widget.ScrollView//*[@resource-id='StoreListItemNative_{internal_store_number}']"
 
 
 class store_selection_screen(base_screen):
@@ -46,7 +46,7 @@ class store_selection_screen(base_screen):
 
     # Get elements section
     def get_search_bar_txt(self):
-        return self.get_element_by_locator(objects_store_selection_screen.search_bar_txt)
+        return self.get_elements_by_locator(objects_store_selection_screen.search_bar_txt)
 
     def get_pizza_hut_ico(self):
         return self.get_element_by_locator(objects_store_selection_screen.pizza_hut_ico)
@@ -108,11 +108,11 @@ class store_selection_screen(base_screen):
 
     def func_navigate_to_main_page(self, user_first_name):
         is_on_map = self.get_my_location_btn()
+        # is_on_origin = self.get_search_bar_txt()
         store_id = '84P18111'
         if len(is_on_map) > 0:
-            pass
-            # self.action_tap_regular_store_selection_ico()
-            # self.func_select_specific_store(store_id)
+            self.action_tap_regular_store_selection_ico()
+            self.func_select_specific_store(store_id)
         if len(is_on_map) == 0:
             self.func_select_specific_store(store_id)
         else:

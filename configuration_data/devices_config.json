@@ -21,6 +21,7 @@
         "appium:noReset": false,
         "appium:hideKeyboard": true,
         "appium:disableIdLocatorAutocompletion": true,
+        "maxInstances": 1,
         "__appium:fullReset" :true,
         "__appium:isHeadless__": true,
         "__appium:avdArgs__": "-no-window",
@@ -46,6 +47,7 @@
         "appium:noReset": false,
         "appium:hideKeyboard": true,
         "appium:disableIdLocatorAutocompletion": true,
+        "maxInstances": 1,
         "__appium:isHeadless__": true,
         "__appium:avdArgs__": "-no-window"
     }

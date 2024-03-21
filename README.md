@@ -31,6 +31,12 @@ emulator -no-window -no-audio @Android34
 appium -p 0.0.0.0:4723
 ```
 
+## download the latest apk file and store it in
+```bash
+./apks/
+```
+
+
 
 ## inspect current apk
 ```bash

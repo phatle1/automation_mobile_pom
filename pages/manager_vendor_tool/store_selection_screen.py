@@ -80,7 +80,7 @@ class store_selection_screen(base_screen):
 
     # Action
     def action_input_to_store_search_bar(self, store_id):
-        return self.action_type(self.get_search_bar_txt(), store_id)
+        return self.action_type(self.get_search_bar_txt()[0], store_id)
 
     def action_tap_on_store_to_select(self):
         return self.action_tap(self.get_first_store_selection())
@@ -122,7 +122,7 @@ class store_selection_screen(base_screen):
         try:
             self.action_input_to_store_search_bar(store_id)
             self.action_tap_on_store_to_select()
-            # self.action_tap_on_yes_btn()
+            self.action_tap_on_yes_btn()
         except Exception:
             pass
 

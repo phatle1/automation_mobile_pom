@@ -2,30 +2,15 @@ from pages.base_screen import base_screen
 from appium.webdriver.common.appiumby import AppiumBy
 
 
-class objects_checklist_screen(object):
+class objects_activity_feed_screen(object):
     checklist_bottom_bar_btn = (AppiumBy.ID, "FEED")
-    current_checklist_lbl = (AppiumBy.XPATH, '//android.widget.TextView[@text="CURRENT"]')
-    checklist_history_lbl = (AppiumBy.XPATH, '//android.widget.TextView[@text="HISTORY"]')
+    activity_feed_screen_title_txt = (AppiumBy.XPATH, '//android.view.View[@text="Activity Feed"]')
+    feed_notification_btn = (AppiumBy.XPATH, '(//android.view.View[@text="Activity Feed"]/parent::android.view.ViewGroup/following-sibling::android.view.ViewGroup//com.horcrux.svg.CircleView)[1]')
+    add_new_feed_btn = (AppiumBy.XPATH, '(//android.view.View[@text="Activity Feed"]/parent::android.view.ViewGroup/following-sibling::android.view.ViewGroup//com.horcrux.svg.CircleView)[2]')
 
-    # checklist items
-    all_current_routine_items_lbl = (AppiumBy.XPATH,
-                                     '((//android.view.ViewGroup[@resource-id="RoutineGroup_RoutineGroupItems"])[1]//*[contains(@resource-id,"RoutineGroupItem@")])/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.widget.TextView[1]')
-    checklist_item_top_menu_lbl = (AppiumBy.XPATH, '//android.widget.HorizontalScrollView//android.widget.TextView')
-    submit_routine_btn = (AppiumBy.XPATH, '//android.widget.TextView[@text="Submit"]')
-
-    back_to_main_check_list_btn = (AppiumBy.XPATH, '(//com.horcrux.svg.SvgView)[1]')
-
-    checklist_items_txt = (AppiumBy.XPATH, '//android.widget.ScrollView//android.widget.TextView')
-
-    input_txt = (AppiumBy.XPATH, '//android.widget.EditText[@text="Manual Input"]')
-
-    @staticmethod
-    def routine_by_name(routine_name):
-        # Setup
-        # Prep
-        # Mid Shift
-        # Review
-        return AppiumBy.XPATH, f'(//android.view.ViewGroup[@resource-id="RoutineGroup_RoutineGroupItems"])[1]//android.widget.TextView[@text="{routine_name}"]'
+    all_feed_top_menu_lbl = (AppiumBy.XPATH, '//android.widget.TextView[@text="ALL FEEDS"]')
+    my_post_top_menu_lbl = (AppiumBy.XPATH, '//android.widget.TextView[@text="MY POSTS"]')
+    groups_top_menu_lbl = (AppiumBy.XPATH, '//android.widget.TextView[@text="GROUPS"]')
 
 
 class routines_screen(base_screen):

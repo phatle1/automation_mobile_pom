@@ -33,7 +33,7 @@
                     "Country ISO Code": "GBR",
                     "Country Name": "Great britain",
                     "Area ID": "",
-                    "Stores": ""
+                    "Stores": "1328357,W750040,W750260,W750261,W750270,W750273,W750274,Y300039,C750136,C750168"
                 },
                 {
                     "Primary Coach": "No",
@@ -51,7 +51,7 @@
                     "Country Code": "44",
                     "Country ISO Code": "GBR",
                     "Country Name": "Great britain",
-                    "Stores": ""
+                    "Stores": "007613,013904,013911,013922,014411,022537,022538,022542,022543,022544,022545,022546,022547,022548,022549,022554,022558,022561,022562"
                 },
                 {
                     "Primary Coach": "No",
@@ -61,7 +61,7 @@
                     "Country ISO Code": "VNM",
                     "Country Name": "Vietnam",
                     "Area ID": "",
-                    "Stores": ""
+                    "Stores": "38655,007613,013904,013911,013922,014411,022537,022538,022542,022543,022544,022545,022546,022547,022548,022549,022554,022558,022561,022562"
                 }
             ],
             "Vendor Reports": "ACE Visit Report,After the visit: L3 Notification,ACE & FSCC Action Plan Reminder"

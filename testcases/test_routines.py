@@ -18,7 +18,7 @@ class Test_Routines(base_test):
 
         user_first_name = data_access_object.get_user_information(username)
         store_selection.func_navigate_to_main_page(user_first_name['First Name'])
-        # routines.func_fill_all_checklist_items()
+        routines.func_fill_all_checklist_items()
 
 
 

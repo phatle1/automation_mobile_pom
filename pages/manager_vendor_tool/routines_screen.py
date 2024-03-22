@@ -1,6 +1,8 @@
 from pages.base_screen import base_screen
 from appium.webdriver.common.appiumby import AppiumBy
 
+from utilities.log_utils import action_log_decorator
+
 
 class objects_checklist_screen(object):
     checklist_bottom_bar_btn = (AppiumBy.ID, "FEED")
@@ -28,6 +30,7 @@ class objects_checklist_screen(object):
         return AppiumBy.XPATH, f'(//android.view.ViewGroup[@resource-id="RoutineGroup_RoutineGroupItems"])[1]//android.widget.TextView[@text="{routine_name}"]'
 
 
+@action_log_decorator
 class routines_screen(base_screen):
     def __init__(self, driver):
         super().__init__(driver)

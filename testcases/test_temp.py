@@ -54,4 +54,6 @@ def test_simple():
 
     assertion = unittest.TestCase()
     assertion.assertEqual(1, 1, 'Not equal')
+    driver.execute_script("document.getElementById('q').value='value here'")
     driver.quit()
+

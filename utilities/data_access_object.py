@@ -29,7 +29,7 @@ class data_access_object:
             response = requests.request("POST", url, headers=headers, data=payload)
 
             response_as_dict = json.loads(response.text)
-            print(f"access_token: {response_as_dict.get('access_token')}")
+            # print(f"access_token: {response_as_dict.get('access_token')}")
             access_token = response_as_dict.get('access_token')
             return access_token
         except requests.exceptions.Timeout:
@@ -51,7 +51,7 @@ class data_access_object:
             }
             response = requests.request("GET", url, headers=headers, data=payload)
             response_as_dict = json.loads(response.text)
-            print(f"user_info: {response_as_dict.get('response_as_dict')}")
+            # print(f"user_info: {response_as_dict.get('response_as_dict')}")
             return response_as_dict
         except requests.exceptions.Timeout:
             pass
@@ -74,8 +74,8 @@ class data_access_object:
             }
             response = requests.request("PUT", url, headers=headers, data=payload)
             result = str(response)
-            print(result)
             return '200' in result
+
         except requests.exceptions.Timeout:
             pass
         except requests.exceptions.TooManyRedirects:

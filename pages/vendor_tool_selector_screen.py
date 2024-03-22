@@ -1,6 +1,8 @@
 from pages.base_screen import base_screen
 from appium.webdriver.common.appiumby import AppiumBy
 
+from utilities.log_utils import action_log_decorator
+
 
 class objects_vendor_tool_selector_screen(object):
     manager_tool_btn = (AppiumBy.ID, 'VendorToolSelector_ShiftManagerAppButton')
@@ -11,6 +13,7 @@ class objects_vendor_tool_selector_screen(object):
         return AppiumBy.XPATH, f"//android.widget.TextView[@text='Hi {user_first_name}!']"
 
 
+@action_log_decorator
 class vendor_tool_selector_screen(base_screen):
     def __init__(self, driver):
         super().__init__(driver)

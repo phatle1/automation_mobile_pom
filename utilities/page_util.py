@@ -118,6 +118,13 @@ class page_utils(WebElement):
         except Exception as ex:
             raise ex
 
+    def action_type_by_execute_script(self, element: WebElement, value) -> None:
+        try:
+            # to-do: to implement new function to send keys by execute_script
+            self.driver.execute_script(f"arguments[0].setAttribute = '{value}';", element)
+        except Exception as ex:
+            raise ex
+
     def action_type_enter(self, element: WebElement):
         try:
             self.wait_until_element_to_be_clickable(element)
@@ -244,7 +251,8 @@ class page_utils(WebElement):
             is_swipe = True
             while is_swipe:
                 try:
-                    self.user_action.w3c_actions = ActionBuilder(self.driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
+                    self.user_action.w3c_actions = ActionBuilder(self.driver,
+                                                                 mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
                     self.user_action.w3c_actions.pointer_action.move_to_location(x=start_x, y=start_y)
                     self.user_action.w3c_actions.pointer_action.pointer_down()
                     self.user_action.w3c_actions.pointer_action.move_to_location(x=end_x, y=end_y)

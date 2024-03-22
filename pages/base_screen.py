@@ -31,6 +31,9 @@ class base_screen:
     def action_type(self, element: WebElement, value):
         self.page_utils.action_type(element=element, value=value)
 
+    def action_type_by_execute_script(self, element: WebElement, value):
+        self.page_utils.action_type_by_execute_script(element=element, value=value)
+
     def click_index(self, locator, index):
         self.page_utils.click_index(locator, index)
 

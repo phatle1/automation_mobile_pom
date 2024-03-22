@@ -1,5 +1,6 @@
 from pages.base_screen import base_screen
 from appium.webdriver.common.appiumby import AppiumBy
+from utilities.log_utils import action_log_decorator
 
 
 class objects_store_selection_screen(object):
@@ -39,7 +40,7 @@ class objects_store_selection_screen(object):
     def store_selection_lbl(internal_store_number):
         return AppiumBy.XPATH, f"//*[@resource-id='SearchBar_TextInput']/parent::android.view.ViewGroup//android.widget.ScrollView//*[@resource-id='StoreListItemNative_{internal_store_number}']"
 
-
+@action_log_decorator
 class store_selection_screen(base_screen):
     def __init__(self, driver):
         super().__init__(driver)

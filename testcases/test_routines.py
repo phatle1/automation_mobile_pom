@@ -1,10 +1,7 @@
 import pytest
 from utilities import data_provider
-from utilities.data_access_object import data_access_object
 from testcases.base_test import base_test
-
-# from testcases.test_login import Test_Login
-# from pages.login_screen import login_screen
+from utilities.data_access_object import data_access_object
 from pages.manager_vendor_tool.routines_screen import routines_screen
 from pages.manager_vendor_tool.store_selection_screen import store_selection_screen
 

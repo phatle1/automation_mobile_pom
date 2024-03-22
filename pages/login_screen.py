@@ -88,5 +88,4 @@ class login_screen(base_screen):
         self.action_type_user_name_txt(user_name)
         self.action_type_pass_word_txt(pass_word)
         self.action_tap_sign_in_btn()
-        # temporary comment out this block
         self.verify_if_system_navigate_back_to_login_screen(user_name, pass_word)

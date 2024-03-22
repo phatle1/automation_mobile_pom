@@ -28,7 +28,7 @@ def get_data(sheet_name):
             print(main_list)
         return main_list
     except PermissionError:
-        print('Permission error')
+        raise PermissionError
 
 
 def get_authentication(account_type):
@@ -51,7 +51,30 @@ def get_authentication(account_type):
                     main_data.insert(i, temp_data)
                     return main_data
     except PermissionError:
-        print('Permission error')
+        raise PermissionError
+
+
+def get_feed_data(content_type):
+    try:
+        workbook = openpyxl.load_workbook(data_file)
+        sheet = workbook["activity_feed"]
+        total_rows = sheet.max_row
+        total_cols = sheet.max_column
+        print("total cols are ", str(total_cols))
+        print("total rows are ", str(total_rows))
+        main_data = []
+
+        for i in range(2, total_rows + 1):
+            temp_data = []
+            for j in range(1, total_cols + 1):
+                data = sheet.cell(row=i, column=j).value
+                if str(data).lower() == str(content_type).lower():
+                    temp_data.insert(j, sheet.cell(row=i, column=j + 1).value)
+                    temp_data.insert(j, sheet.cell(row=i, column=j + 2).value)
+                    main_data.insert(i, temp_data)
+                    return main_data
+    except PermissionError:
+        raise PermissionError
 
 
 def get_routine_from_routine_management():
@@ -122,4 +145,5 @@ def collect_usable_record_from_routine_file(file):
 
 
 if __name__ == '__main__':
-    collect_usable_record_from_routine_file(routines_file)
+    # collect_usable_record_from_routine_file(routines_file)
+    get_feed_data('pure')

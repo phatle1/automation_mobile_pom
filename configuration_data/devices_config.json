@@ -21,14 +21,14 @@
         "appium:noReset": false,
         "appium:hideKeyboard": true,
         "appium:disableIdLocatorAutocompletion": true,
-        "maxInstances": 1,
+        "appium:maxInstances": 1,
         "__appium:fullReset" :true,
         "__appium:isHeadless__": true,
         "__appium:avdArgs__": "-no-window",
         "__android:id/navigationBarBackground--": ""
     },
     "device2": {
-        "appium:platformName": "Android",
+        "platformName": "Android",
         "appium:deviceName": "l7bunn4h69lfxc8d",
         "appium:automationName": "UiAutomator2",
         "appium:app": "/Users/lephat/PycharmProjects/automation_mobile_pom/apks/signed.apk",
@@ -47,7 +47,7 @@
         "appium:noReset": false,
         "appium:hideKeyboard": true,
         "appium:disableIdLocatorAutocompletion": true,
-        "maxInstances": 1,
+        "appium:maxInstances": 1,
         "__appium:isHeadless__": true,
         "__appium:avdArgs__": "-no-window"
     }

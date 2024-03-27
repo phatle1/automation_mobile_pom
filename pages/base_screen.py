@@ -61,6 +61,9 @@ class base_screen:
     def wait_until_element_to_be_visible(self, element: WebElement):
         return self.page_utils.wait_until_element_to_be_visible(element)
 
+    def wait_until_element_to_be_clickable(self, element: WebElement):
+        return self.page_utils.wait_until_element_to_be_clickable(element)
+
     def wait_until_element_disappeared(self, element: WebElement):
         return self.page_utils.wait_until_element_to_be_invisible(element)
 

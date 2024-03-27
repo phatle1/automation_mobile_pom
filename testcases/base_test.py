@@ -13,7 +13,7 @@ class base_test:
     def log_in_out(self, username, password):
         login_home_screen = login_screen(self.driver)
         data_access = data_access_object
-        user_first_name = (data_access.get_user_information(username))
+        user_details = data_access.get_user_information(username)
         data_access.update_user_information(username)
         vendor_tool = vendor_tool_selector_screen(self.driver)
         store_selection = store_selection_screen(self.driver)
@@ -21,6 +21,6 @@ class base_test:
         login_home_screen.func_login(user_name=username, pass_word=password)
         vendor_tool.action_tap_vendor_tool('manager')
 
-        store_selection.func_navigate_to_main_page(user_first_name['First Name'])
+        store_selection.func_navigate_to_main_page(user_details['First Name'])
         yield
         print('log out')

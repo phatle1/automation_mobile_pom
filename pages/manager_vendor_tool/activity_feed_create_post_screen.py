@@ -1,8 +1,8 @@
 from utilities import data_provider
 from pages.base_screen import base_screen
+from utilities.logic_utils import Logic_Util
 from utilities.log_utils import action_log_decorator
 from appium.webdriver.common.appiumby import AppiumBy
-from datetime import datetime
 
 
 class objects_activity_feed_create_post_screen(object):
@@ -90,10 +90,8 @@ class activity_feed_create_post_screen(base_screen):
             self.action_tap_top_viewer_group()
             self.action_tap_viewer_chk()
             self.action_tap_done_btn()
-            feed = data_provider.get_feed_data("pure")[0][0]
-            self.action_type_feed_content(feed)
-            current_time = datetime.now()
-            readable_time = current_time.strftime('%b %d, %Y')
+            feed_content = ''.join((Logic_Util.id_generator() + '_', data_provider.get_feed_data("pure")[0][0]))
+            self.action_type_feed_content(feed_content)
             self.action_tap_publish_feed_btn()
 
         except Exception:

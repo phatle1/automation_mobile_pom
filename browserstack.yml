@@ -1,26 +1,26 @@
 userName: phatle_afrz7u
 accessKey: zj4zjb2ZMjDn9nzzezPv
 framework: pytest
-app: bs://ea2b00215b9c4d4e7aee4f96c905c58aab1e72df
+app: bs://11866145de1c11a6dedbef7ada3cb72fd810f93c
 platforms:
   - platformName: android
     deviceName: Samsung Galaxy S23 Ultra
     platformVersion: 13.0
-#  - platformName: android
-#    deviceName: Xiaomi Redmi Note 11
-#    platformVersion: 11.0
-#  - platformName: android
-#    deviceName: Oppo Reno 6
-#    platformVersion: 11.0
-#  - platformName: android
-#    deviceName: Samsung Galaxy S24 Ultra
-#    platformVersion: 14.0
-#  - platformName: android
-#    deviceName: Huawei P30
-#    platformVersion: 9.0
-#  - platformName: android
-#    deviceName: OnePlus 11R
-#    platformVersion: 13.0
+  - platformName: android
+    deviceName: Xiaomi Redmi Note 11
+    platformVersion: 11.0
+  - platformName: android
+    deviceName: Oppo Reno 6
+    platformVersion: 11.0
+  - platformName: android
+    deviceName: Samsung Galaxy S24 Ultra
+    platformVersion: 14.0
+  - platformName: android
+    deviceName: Huawei P30
+    platformVersion: 9.0
+  - platformName: android
+    deviceName: OnePlus 11R
+    platformVersion: 13.0
 parallelsPerPlatform: 1        
 browserstackLocal: false
 buildName: HutBot

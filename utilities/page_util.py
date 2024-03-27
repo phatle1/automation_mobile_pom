@@ -151,17 +151,23 @@ class page_utils(WebElement):
         except NoSuchElementException:
             logger.error("Element not found: " + str(locator))
 
-    def get_text(self, element: WebElement):
+    @staticmethod
+    def get_text(element: WebElement) -> str:
         try:
-            text = ''
             if element.text is not None:
                 text = element.text
             else:
                 text = ''
             logger.info(f"Getting text from element: {text}")
             return text
-        except self.exceptions:
-            logger.error(f"Element not found: {str(element)}")
+        except NoSuchElementException:
+            raise NoSuchElementException
+        except StaleElementReferenceException:
+            raise StaleElementReferenceException
+        except ElementNotVisibleException:
+            raise ElementNotVisibleException
+        except TimeoutException:
+            raise TimeoutException
 
     def wait_until_element_to_be_visible(self, element: WebElement) -> WebElement | bool:
         try:
@@ -183,13 +189,13 @@ class page_utils(WebElement):
                                         ignored_exceptions=self.exceptions)
             return fluent_wait.until(expected_conditions.element_to_be_clickable(element))
         except NoSuchElementException:
-            pass
+            raise NoSuchElementException
         except StaleElementReferenceException:
-            pass
+            raise StaleElementReferenceException
         except ElementNotVisibleException:
-            pass
+            raise ElementNotVisibleException
         except TimeoutException:
-            pass
+            raise TimeoutException
 
     def wait_until_element_to_be_invisible(self, element: WebElement):
         try:
@@ -197,13 +203,13 @@ class page_utils(WebElement):
                                         ignored_exceptions=self.exceptions)
             return fluent_wait.until(expected_conditions.invisibility_of_element(element))
         except NoSuchElementException:
-            pass
+            raise NoSuchElementException
         except StaleElementReferenceException:
-            pass
+            raise StaleElementReferenceException
         except ElementNotVisibleException:
-            pass
+            raise ElementNotVisibleException
         except TimeoutException:
-            pass
+            raise TimeoutException
 
     def wait_until_element_to_be_selected(self, element: WebElement):
         try:

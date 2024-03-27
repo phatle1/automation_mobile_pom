@@ -17,13 +17,12 @@ class Test_Activity_Feed(base_test):
     def test_user_can_submit_a_feed(self, username, password, log_in_out):
         store_selection = store_selection_screen(self.driver)
         activity_feed = activity_feed_screen(self.driver)
-        activity_feed_create_post = activity_feed_create_post_screen(self.driver)
 
-        user_first_name = data_access_object.get_user_information(username)
-        store_selection.func_navigate_to_main_page(user_first_name['First Name'])
+        user_details = data_access_object.get_user_information(username)
+        store_selection.func_navigate_to_main_page(user_details['First Name'])
         activity_feed.action_tap_feed_bottom_bar_btn()
         activity_feed.action_tap_add_new_feed_btn()
-        activity_feed_create_post.func_create_a_feed(is_image=True, is_attack=True, username=username)
+        activity_feed.func_create_a_feed(is_image=True, is_attack=True, user_details=user_details)
 
 
 

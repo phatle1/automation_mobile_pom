@@ -15,7 +15,7 @@ from selenium.webdriver.common.by import By
 
 options = UiAutomator2Options()
 options.load_capabilities({
-    "platformName": "Android",
+    "appium:platformName": "Android",
     "appium:deviceName": "emulator-5554",
     "appium:automationName": "UiAutomator2",
     "appium:app": "/Users/lephat/Downloads/signed.apk",

@@ -49,9 +49,10 @@ class login_screen(base_screen):
 
     def action_tap_login_with_pwd_btn(self):
         element = self.get_login_with_pwd_btn()
-        assert self.is_element_present(element).__eq__("asd")
-        self.action_tap(element)
-        self.wait_until_element_disappeared(element=element)
+        assert self.is_element_present(element)
+        a = self.wait_until_element_to_be_clickable(element)
+        b = self.action_tap(element)
+        c = self.wait_until_element_disappeared(element=element)
 
     def action_type_pass_word_txt(self, pass_word):
         self.action_type(element=self.get_pass_word_txt(), value=pass_word)
@@ -60,6 +61,10 @@ class login_screen(base_screen):
         element = self.get_sign_in_btn()
         self.action_tap(element=element)
         assert self.wait_until_element_disappeared(element=element)
+
+    def action_wait_until_login_with_pw_to_be_clickable(self):
+        self.wait_until_element_to_be_visible(self.get_login_with_pwd_btn())
+        self.wait_until_element_to_be_clickable(self.get_login_with_pwd_btn())
 
     def verify_user_can_input_to_textbox(self, value):
         self.is_element_filled_by_inputted_value(self.get_user_name_txt(), value)
@@ -84,6 +89,7 @@ class login_screen(base_screen):
 
     def func_login(self, user_name, pass_word):
         self.action_tap_login_btn()
+        self.action_wait_until_login_with_pw_to_be_clickable()
         self.action_tap_login_with_pwd_btn()
         self.action_type_user_name_txt(user_name)
         self.action_type_pass_word_txt(pass_word)

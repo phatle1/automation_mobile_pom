@@ -47,7 +47,6 @@ def action_log_decorator(cls):
                         str_to_extract = item.code_context[0].split("self.")[1].split("()")[0].removesuffix("\n")
                     else:
                         str_to_extract = item.code_context[0].split(".")[1].split("()")[0].removesuffix("\n")
-
                 if f"{parent_path}/testcases" in item.filename:
                     code_context = item.code_context
                     called_func = code_context[0].split("(")[0]
@@ -62,7 +61,6 @@ def action_log_decorator(cls):
                 action_log = f"[{screen_name}] {action_log}"
             if str(func_name).startswith("verify"):
                 action_log = f"🟢 {action_log}"
-
             # Get parameters of the called function
             print_args = print_kwargs = ""
             if isinstance(func, type(lambda: 1)):
@@ -72,7 +70,6 @@ def action_log_decorator(cls):
                 print_kwargs = ", " + ", ".join(f"{k}={v!r}" for k, v in kwargs.items())
             action_log += f" [params: '{print_args}'{print_kwargs}]" if print_args or print_kwargs else ""
             action_log = action_log.replace("'', ", "")
-
             # Execute function
             action_log += f'{testcase_name} - {screen_name} - {action}'
             start_time = time.perf_counter()
@@ -82,7 +79,6 @@ def action_log_decorator(cls):
             action_log += f' ran in [{'{0:.4f}s'.format(run_time)}]'
             logger.info(action_log)
             return val
-
         return wrapper
 
     for k in cls.__dict__.keys():

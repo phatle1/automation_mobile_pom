@@ -69,3 +69,6 @@ class base_screen:
 
     def get_elements_by_locator(self, *locator):
         return self.page_utils.get_elements_by_locator(*locator)
+
+    def wait_until_element_to_be_visible_by_locator(self, *locator):
+        return self.page_utils.wait_until_element_to_be_visible_by_locator(*locator)

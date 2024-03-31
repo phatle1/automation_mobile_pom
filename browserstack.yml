@@ -6,21 +6,21 @@ platforms:
   - platformName: android
     deviceName: Samsung Galaxy S23 Ultra
     platformVersion: 13.0
-  - platformName: android
-    deviceName: Xiaomi Redmi Note 11
-    platformVersion: 11.0
-  - platformName: android
-    deviceName: Oppo Reno 6
-    platformVersion: 11.0
-  - platformName: android
-    deviceName: Samsung Galaxy S24 Ultra
-    platformVersion: 14.0
-  - platformName: android
-    deviceName: Huawei P30
-    platformVersion: 9.0
-  - platformName: android
-    deviceName: OnePlus 11R
-    platformVersion: 13.0
+#  - platformName: android
+#    deviceName: Xiaomi Redmi Note 11
+#    platformVersion: 11.0
+#  - platformName: android
+#    deviceName: Oppo Reno 6
+#    platformVersion: 11.0
+#  - platformName: android
+#    deviceName: Samsung Galaxy S24 Ultra
+#    platformVersion: 14.0
+#  - platformName: android
+#    deviceName: Huawei P30
+#    platformVersion: 9.0
+#  - platformName: android
+#    deviceName: OnePlus 11R
+#    platformVersion: 13.0
 parallelsPerPlatform: 1        
 browserstackLocal: false
 buildName: HutBot

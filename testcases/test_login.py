@@ -11,7 +11,7 @@ from pages.vendor_tool_selector_screen import vendor_tool_selector_screen
 from pages.manager_vendor_tool.store_selection_screen import store_selection_screen
 
 from utilities import data_provider
-from utilities import data_access_object
+from utilities import data_access_object_apis
 
 
 class Test_Login(base_test):

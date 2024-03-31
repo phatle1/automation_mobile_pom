@@ -1,11 +1,15 @@
 import json
 from configparser import ConfigParser
+from pathlib import Path
+
+parent_path = Path(__file__).resolve().parents[1]
+conf = f'{parent_path}/configuration_data/conf.ini'
 
 
 def read_config(section, key):
     try:
         config = ConfigParser()
-        config.read("..\\configuration_data\\conf.ini")
+        config.read(conf)
         return config.get(section, key)
     except FileNotFoundError:
         pass

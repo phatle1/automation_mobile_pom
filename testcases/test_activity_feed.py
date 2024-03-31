@@ -1,6 +1,6 @@
 import pytest
 from utilities import data_provider
-from utilities.data_access_object import data_access_object
+from utilities.data_access_object_apis import data_access_object
 from testcases.base_test import base_test
 
 # from testcases.test_login import Test_Login
@@ -14,6 +14,7 @@ from pages.manager_vendor_tool.activity_feed_create_post_screen import activity_
 class Test_Activity_Feed(base_test):
 
     @pytest.mark.parametrize("username,password", data_provider.get_authentication("FBA"))
+    @pytest.mark.regression
     def test_user_can_submit_a_feed(self, username, password, log_in_out):
         store_selection = store_selection_screen(self.driver)
         activity_feed = activity_feed_screen(self.driver)

@@ -183,6 +183,20 @@ class page_utils(WebElement):
         except TimeoutException:
             raise TimeoutException
 
+    def wait_until_element_to_be_visible_by_locator(self, *locator) -> WebElement | bool:
+        try:
+            fluent_wait = WebDriverWait(self.driver, self.time_out, poll_frequency=5,
+                                        ignored_exceptions=self.exceptions)
+            return fluent_wait.until(expected_conditions.visibility_of_element_located(*locator))
+        except NoSuchElementException:
+            raise NoSuchElementException
+        except StaleElementReferenceException:
+            raise StaleElementReferenceException
+        except ElementNotVisibleException:
+            raise ElementNotVisibleException
+        except TimeoutException:
+            raise TimeoutException
+
     def wait_until_element_to_be_clickable(self, element: WebElement):
         try:
             fluent_wait = WebDriverWait(self.driver, self.time_out, poll_frequency=5,

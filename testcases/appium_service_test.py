@@ -3,7 +3,7 @@ import pytest
 from appium.webdriver.appium_service import AppiumService
 
 
-@pytest.fixture
+@pytest.mark.skip
 def appium_service() -> Generator[AppiumService, None, None]:
     service = AppiumService()
     service.start(
@@ -17,7 +17,7 @@ def appium_service() -> Generator[AppiumService, None, None]:
         service.stop()
 
 
-@pytest.skip('Unstable in CI env')
+@pytest.mark.skip('Unstable in CI env')
 def test_appium_service(appium_service: AppiumService) -> None:
     assert appium_service.is_running
     assert appium_service.is_listening

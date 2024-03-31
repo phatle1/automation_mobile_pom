@@ -1,15 +1,12 @@
-import os
-import time
+
 import allure
 import pytest
-import logging
 from pathlib import Path
 from appium import webdriver
 from utilities import config_reader
 from utilities.log_utils import logger
 from allure_commons.types import AttachmentType
 from appium.options.common.base import AppiumOptions
-from appium.options.android import UiAutomator2Options
 from appium.webdriver.appium_service import AppiumService, DEFAULT_PORT, DEFAULT_HOST
 
 # log = logger(__name__, logging.INFO)

@@ -1,6 +1,6 @@
 import pytest
 
-from utilities.data_access_object import data_access_object
+from utilities.data_access_object_apis import data_access_object
 from pages.login_screen import login_screen
 from pages.vendor_tool_selector_screen import vendor_tool_selector_screen
 from pages.manager_vendor_tool.store_selection_screen import store_selection_screen

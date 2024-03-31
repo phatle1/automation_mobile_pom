@@ -10,11 +10,12 @@ env/*
 venv/*
 allure_report/
 allure-report/
-apk/
+apks/
 appium_grid_files/
 selenium_server/
 bin/
 lib/
+selenium_grid/*.jar
 
 #remove all pyc file
 #find . -name "*.pyc" -exec git rm -f "{}" \;

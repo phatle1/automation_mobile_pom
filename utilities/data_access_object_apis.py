@@ -1,6 +1,10 @@
 import json
 import requests
+from pathlib import Path
 from utilities import config_reader
+
+parent_path = Path(__file__).resolve().parents[1]
+configuration_data = f'{parent_path}/configuration_data/api_body.json'
 
 
 class data_access_object:
@@ -65,7 +69,7 @@ class data_access_object:
     def update_user_information(yum_id) -> bool:
         try:
             url = f"https://dev.api.hutbot.pizzahut.io/ssam-users/{yum_id}"
-            body: dict[str, any] = config_reader.load_devices_config("../configuration_data/api_body.json")
+            body: dict[str, any] = config_reader.load_devices_config(configuration_data)
             user_info = body['apis']['update_user_info']
             payload = json.dumps(user_info)
             headers = {
@@ -83,4 +87,3 @@ class data_access_object:
         except requests.exceptions.RequestException as e:
             # catastrophic error. bail.
             raise SystemExit(e)
-

@@ -1,18 +1,18 @@
 import psycopg2
 import psycopg2.extras
 from psycopg2 import Error
-from load_db_config import load_config
+from load_db_config import load_db_config
+
+global connection
+global cursor
 
 
-def connect(load_config):
+def connect(load_db_config):
     try:
-        global connection
-        global cursor
-        config = load_config()
-        connection = psycopg2.connect(**config)
-        cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-        print('Connected to the PostgreSQL server.')
-        return cursor
+        db_config = load_db_config
+        db_connection = psycopg2.connect(**db_config)
+        db_cursor = db_connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        return db_cursor
     except (Exception, Error) as error:
         print(error)
 
@@ -24,5 +24,5 @@ def close_connect():
 
 
 if __name__ == '__main__':
-    config = load_config()
+    config = load_db_config()
     connect(config)

@@ -2,7 +2,7 @@ from configparser import ConfigParser
 from pathlib import Path
 
 parent_path = Path(__file__).resolve().parents[1]
-db_conf = f'{parent_path}/data_access_object/database.ini'
+db_conf = f'{parent_path}/data_access_object_db/database.ini'
 
 
 def load_db_config(section):

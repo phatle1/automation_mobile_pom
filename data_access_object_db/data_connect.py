@@ -1,7 +1,7 @@
 import psycopg2
+from data_access_object_db import load_db_config
 import psycopg2.extras
 from psycopg2 import Error
-from load_db_config import load_db_config
 
 global connection
 global cursor
@@ -24,5 +24,5 @@ def close_connect():
 
 
 if __name__ == '__main__':
-    config = load_db_config()
+    config = load_db_config
     connect(config)

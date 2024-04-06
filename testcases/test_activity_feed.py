@@ -1,14 +1,9 @@
 import pytest
 from utilities import data_provider
-from utilities.data_access_object_apis import data_access_object
 from testcases.base_test import base_test
-
-# from testcases.test_login import Test_Login
-# from pages.login_screen import login_screen
-from pages.manager_vendor_tool.routines_screen import routines_screen
-from pages.manager_vendor_tool.store_selection_screen import store_selection_screen
+from data_access_object_api.data_access_object_apis import data_access_object
 from pages.manager_vendor_tool.activity_feed_screen import activity_feed_screen
-from pages.manager_vendor_tool.activity_feed_create_post_screen import activity_feed_create_post_screen
+from pages.manager_vendor_tool.store_selection_screen import store_selection_screen
 
 
 class Test_Activity_Feed(base_test):

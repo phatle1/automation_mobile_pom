@@ -3,6 +3,7 @@ from pages.base_screen import base_screen
 from utilities.logic_utils import Logic_Util
 from utilities.log_utils import action_log_decorator
 from appium.webdriver.common.appiumby import AppiumBy
+from data_access_object_db.feeds_dao import feeds_queries_execute
 
 
 class objects_activity_feed_screen(object):
@@ -127,7 +128,7 @@ class activity_feed_screen(base_screen):
 
     # Assert
     def assert_select_viewer_screen_is_shown(self):
-        assert self.is_element_present(self.get_choose_your_viewers_lbl())
+        self.assertTrue(self.is_element_present(self.get_choose_your_viewers_lbl()))
 
     # Func
     def func_create_a_feed(self, is_image: bool, is_attack: bool, user_details: dict):
@@ -141,8 +142,7 @@ class activity_feed_screen(base_screen):
             feed = ''.join((feed_id + '_', feed_content))
             self.action_type_feed_content(feed)
             self.action_tap_publish_feed_btn()
-            user_full_name = f"{user_details['First Name']} {user_details['Last Name']}"
-            self.verify_a_feed_is_added_successfully(user_full_name, feed_id)
+            self.verify_a_feed_is_added_successfully(user_details, feed_id)
 
         except Exception:
             raise Exception
@@ -152,10 +152,18 @@ class activity_feed_screen(base_screen):
         pass
 
     # Verify
-    def verify_a_feed_is_added_successfully(self, exp_feed_owner, exp_feed_content):
+    def verify_a_feed_is_added_successfully(self, user_details, exp_feed_content):
+        user_full_name = f"{user_details['First Name']} {user_details['Last Name']}"
+        yum_id = user_details['Yum ID']
         actual_feed_owner = self.get_text(self.get_af_feed_owner())
         actual_feed_content = self.get_text(self.get_af_feed_content())
-        assert exp_feed_owner.__eq__(actual_feed_owner)
-        assert exp_feed_content in actual_feed_content
+        # is_exist = feeds_queries_execute.get_feed_by_yum_id_and_content(yum_id=yum_id, content=exp_feed_content)
+        # self.assertIsNotNone(is_exist, 'Data is not exiting')
+        self.assertEqual(user_full_name, actual_feed_owner, f'{user_full_name} is not equal with {actual_feed_content}')
+        self.assertIn(exp_feed_content, actual_feed_content, f'{exp_feed_content} is not in {actual_feed_content}')
+
+        # assert (len(is_exist) > 0)
+        # assert user_full_name.__eq__(actual_feed_owner)
+        # assert exp_feed_content in actual_feed_content
 
     # Func

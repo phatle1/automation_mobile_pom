@@ -2,14 +2,16 @@ import logging
 from utilities.log_util import logger
 from utilities.page_util import page_utils
 from selenium.webdriver.remote.webelement import WebElement
+import unittest
 # from utilities.log_utils import logger, action_log_decorator
 
 
 # log = logger(__name__, logging.INFO)
 
-class base_screen:
+class base_screen(unittest.TestCase):
 
     def __init__(self, driver):
+        super().__init__()
         self.driver = driver
         self.page_utils = page_utils(self.driver)
 

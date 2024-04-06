@@ -11,7 +11,7 @@ class object_login_screen(object):
     auth_hidden_menu_btn = (AppiumBy.ID, 'Auth_HiddenMenu')
     yum_sso_user_name_txt = (AppiumBy.XPATH, '//android.widget.EditText[1]')
     yum_sso_pass_word_txt = (AppiumBy.XPATH, '//android.widget.EditText[2]')
-    yum_sso_login_with_pwd_btn = (AppiumBy.XPATH, '//android.widget.Button[@resource-id="loginwithpwdbtn"]')
+    yum_sso_login_with_pwd_btn = (AppiumBy.XPATH, '//android.widget.Button[@text="Login with Password"]')
     yum_sso_sign_in_btn = (AppiumBy.XPATH, '//android.widget.Button[@text="Sign in"]')
 
 
@@ -64,7 +64,7 @@ class login_screen(base_screen):
         assert self.wait_until_element_disappeared(element=element)
 
     def action_wait_until_login_with_pw_to_be_clickable(self):
-        self.wait_until_element_to_be_visible(self.get_login_with_pwd_btn())
+        # self.wait_until_element_to_be_visible(self.get_login_with_pwd_btn())
         self.wait_until_element_to_be_clickable(self.get_login_with_pwd_btn())
         self.wait_until_element_to_be_visible_by_locator(object_login_screen.yum_sso_login_with_pwd_btn)
 

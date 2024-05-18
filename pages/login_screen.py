@@ -7,11 +7,12 @@ from utilities.log_utils import logger, action_log_decorator
 
 class object_login_screen(object):
     # log_in_btn = (AppiumBy.XPATH, '//android.widget.TextView[@text="Log In"]')
-    log_in_btn = (AppiumBy.XPATH, '//android.view.ViewGroup[@resource-id="Auth_LoginButton"]')
+    # log_in_btn = (AppiumBy.XPATH, '//android.view.ViewGroup[@resource-id="Auth_LoginButton"]')
+    log_in_btn = (AppiumBy.XPATH, '*//.[@text="Log In"]')
     auth_hidden_menu_btn = (AppiumBy.ID, 'Auth_HiddenMenu')
     yum_sso_user_name_txt = (AppiumBy.XPATH, '//android.widget.EditText[1]')
     yum_sso_pass_word_txt = (AppiumBy.XPATH, '//android.widget.EditText[2]')
-    yum_sso_login_with_pwd_btn = (AppiumBy.XPATH, '//android.widget.Button[@text="Login with Password"]')
+    yum_sso_login_with_pwd_btn = (AppiumBy.XPATH, '*//.[@text="Login with Password"]')
     yum_sso_sign_in_btn = (AppiumBy.XPATH, '//android.widget.Button[@text="Sign in"]')
 
 

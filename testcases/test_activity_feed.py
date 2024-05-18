@@ -19,8 +19,3 @@ class Test_Activity_Feed(base_test):
         activity_feed.action_tap_feed_bottom_bar_btn()
         activity_feed.action_tap_add_new_feed_btn()
         activity_feed.func_create_a_feed(is_image=True, is_attack=True, user_details=user_details)
-
-
-
-
-

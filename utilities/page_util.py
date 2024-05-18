@@ -1,4 +1,3 @@
-import logging
 import time
 from time import sleep
 from typing import List, Any
@@ -6,19 +5,14 @@ from typing import List, Any
 from utilities import config_reader
 from selenium.webdriver import Keys
 from utilities.log_utils import logger
-from multiprocessing import TimeoutError
-from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.remote.webelement import WebElement
-from appium.webdriver.common.touch_action import TouchAction
-from appium.webdriver.common.multi_action import MultiAction
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.common.exceptions import ElementNotVisibleException, NoSuchElementException, \
     StaleElementReferenceException
 
 # For W3C actions
-from selenium.webdriver.common.by import By
 from selenium.webdriver.common.actions import interaction
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.actions.pointer_input import PointerInput
